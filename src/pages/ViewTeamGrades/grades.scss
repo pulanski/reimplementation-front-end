@@ -68,6 +68,15 @@
   table-layout: fixed; /* Fix the layout of the table */
 }
 
+// .tbl_heat td {
+//   cursor: pointer;
+//   padding: 8px; /* Adjust padding of table cells */
+//   border: 1px black solid;
+//   width: auto; /* Set the width of table cells to auto */
+//   font-size: 11px; /* Adjust font size for table data */
+//   table-layout: fixed;
+// }
+
 .tbl_heat td {
   cursor: pointer;
   padding: 8px; /* Adjust padding of table cells */
@@ -75,7 +84,22 @@
   width: auto; /* Set the width of table cells to auto */
   font-size: 11px; /* Adjust font size for table data */
   table-layout: fixed;
+  position: relative; /* Required for absolute positioning */
 }
+
+.tbl_heat td[data-question]:hover::after {
+  content: attr(data-question); /* Display the question text as a tooltip */
+  position: absolute;
+  background-color: rgba($color: #000000, $alpha: 1);
+  color: #ffffff;
+  padding: 4px;
+  border-radius: 4px;
+  bottom: 130%; /* Position the tooltip above the td */
+  left: 0%; /* Center the tooltip horizontally */
+  //transform: translateX(-50%); /* Center the tooltip horizontally */
+  white-space: nowrap; /* Prevent tooltip from wrapping */
+}
+
 
 .tbl_heat th {
   border: 1px black solid;
