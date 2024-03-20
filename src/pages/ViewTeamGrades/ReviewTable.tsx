@@ -137,6 +137,7 @@ const ReviewTable: React.FC = () => {
     else if (scoreColor >= 0 && scoreColor < 20) return 'c5';
     else return 'cf';
   };
+  
 
   const averageScoreColorClass = getColorClass(totalAvg, totalMaxScore);
   let sortedData = [...dummyData];
@@ -173,10 +174,10 @@ const ReviewTable: React.FC = () => {
           <tbody>
             {sortedData.map((row, index) => (
               <tr key={index} className={index === sortedData.length - 1 ? "no-bg" : ""}>
-                <td className="py-2 px-4" title={row.questionText}>{row.questionNumber}</td>
+                <td className={`py-2 px-4 text-center`} data-question={row.questionText}>{row.questionNumber}</td>
                 {row.reviews.map((review, idx) => (
-                  <td key={idx} className={`py-2 px-4 text-center ${getColorClass(review.score, row.maxScore)}`}>
-                    <span style={{ textDecoration: review.comment ? 'underline' : 'none' }} title={review.comment}>{review.score}</span>
+                  <td key={idx} className={`py-2 px-4 text-center ${getColorClass(review.score, row.maxScore)}`} data-question={review.comment}>
+                    <span style={{ textDecoration: review.comment ? 'underline' : 'none' }}>{review.score}</span>
                   </td>
                 ))}
                 <td className="py-2 px-4 text-center">{row.RowAvg.toFixed(2)}</td>
