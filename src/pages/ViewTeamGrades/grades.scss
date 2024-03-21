@@ -165,3 +165,37 @@
   font-size: 11px !important;
   font-weight: bold !important;
 }
+
+// grades.scss
+
+.round-selector {
+  display: flex;
+}
+
+.round-button {
+  padding: 7px 7px;
+  margin: 5px;
+  border: 2px solid #4a90e2;
+  border-radius: 10px;
+  background-color: #4a90e2;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #357bd8;
+    border-color: #357bd8;
+  }
+
+  &.current {
+    background-color: #2ecc71;
+    border-color: #2ecc71;
+  }
+  .round-selector > div {
+    display: flex;
+    align-items: center;
+    margin: auto;
+  }
+}
