@@ -11,16 +11,18 @@ import { RootState } from "../../store/store";
 import { IParticipantResponse, ROLE } from "../../utils/interfaces";
 import DeleteParticipant from "./ParticipantDelete";
 import { participantColumns as PARPTICIPANT_COLUMNS } from "./participantColumns";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 /**
  * @author Atharva Thorve on October, 2023
  */
 
 interface IModel {
-  type: "student_tasks" | "courses"| "assignments";
+  type: "student_tasks" | "courses" | "assignments";
 }
 
-const Participants: React.FC<IModel> = ({ type}) => {
+const Participants: React.FC<IModel> = ({ type }) => {
+  const tooltip = <Tooltip id="tooltip">Add Participant</Tooltip>;
   const { error, isLoading, data: participantResponse, sendRequest: fetchParticipants } = useAPI();
   const auth = useSelector(
     (state: RootState) => state.authentication,
@@ -29,7 +31,7 @@ const Participants: React.FC<IModel> = ({ type}) => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
-  const {typeId} = useParams();
+  const { typeId } = useParams();
 
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState<{
     visible: boolean;
@@ -37,7 +39,8 @@ const Participants: React.FC<IModel> = ({ type}) => {
   }>({ visible: false });
 
   useEffect(() => {
-    if (!showDeleteConfirmation.visible) fetchParticipants({ url: `/${type}/${typeId}/participants` });
+    if (!showDeleteConfirmation.visible)
+      fetchParticipants({ url: `/${type}/${typeId}/participants` });
   }, [fetchParticipants, location, showDeleteConfirmation.visible, auth.user.id, type, typeId]);
 
   // Error alert
@@ -47,15 +50,20 @@ const Participants: React.FC<IModel> = ({ type}) => {
     }
   }, [error, dispatch]);
 
-  const onDeleteParticipantHandler = useCallback(() => setShowDeleteConfirmation({ visible: false }), []);
+  const onDeleteParticipantHandler = useCallback(
+    () => setShowDeleteConfirmation({ visible: false }),
+    []
+  );
 
   const onEditHandle = useCallback(
-    (row: TRow<IParticipantResponse>) => navigate(`/${type}/${typeId}/participants/edit/${row.original.id}`),
-    [navigate, type,typeId]
+    (row: TRow<IParticipantResponse>) =>
+      navigate(`/${type}/${typeId}/participants/edit/${row.original.id}`),
+    [navigate, type, typeId]
   );
 
   const onDeleteHandle = useCallback(
-    (row: TRow<IParticipantResponse>) => setShowDeleteConfirmation({ visible: true, data: row.original }),
+    (row: TRow<IParticipantResponse>) =>
+      setShowDeleteConfirmation({ visible: true, data: row.original }),
     []
   );
 
@@ -69,7 +77,7 @@ const Participants: React.FC<IModel> = ({ type}) => {
     [participantResponse?.data, isLoading]
   );
 
-  console.log(participantResponse)
+  console.log(participantResponse);
 
   return (
     <>
@@ -84,12 +92,17 @@ const Participants: React.FC<IModel> = ({ type}) => {
           </Row>
           <Row>
             <Col md={{ span: 1, offset: 11 }}>
-              <Button variant="outline-success" onClick={() => navigate("new")}>
-                <BsPersonFillAdd />
-              </Button>
+              <OverlayTrigger overlay={tooltip} placement="bottom">
+                <Button variant="outline-success" onClick={() => navigate("new")}>
+                  <BsPersonFillAdd />
+                </Button>
+              </OverlayTrigger>
             </Col>
             {showDeleteConfirmation.visible && (
-              <DeleteParticipant participantData={showDeleteConfirmation.data!} onClose={onDeleteParticipantHandler} />
+              <DeleteParticipant
+                participantData={showDeleteConfirmation.data!}
+                onClose={onDeleteParticipantHandler}
+              />
             )}
           </Row>
           <Row>
@@ -107,5 +120,5 @@ const Participants: React.FC<IModel> = ({ type}) => {
     </>
   );
 };
- 
+
 export default Participants;

@@ -1,5 +1,5 @@
 import { createColumnHelper, Row } from "@tanstack/react-table";
-import { Button } from "react-bootstrap";
+import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { BsPencilFill, BsPersonXFill } from "react-icons/bs";
 import { IParticipantResponse as IParticipant } from "../../utils/interfaces";
 
@@ -9,6 +9,7 @@ import { IParticipantResponse as IParticipant } from "../../utils/interfaces";
 
 type Fn = (row: Row<IParticipant>) => void;
 const columnHelper = createColumnHelper<IParticipant>();
+const tooltip = <Tooltip id="tooltip">Delete Participant</Tooltip>;
 export const participantColumns = (handleEdit: Fn, handleDelete: Fn) => [
   columnHelper.accessor("id", {
     header: "Id",
@@ -77,14 +78,16 @@ export const participantColumns = (handleEdit: Fn, handleDelete: Fn) => [
     header: "Actions",
     cell: ({ row }) => (
       <>
-        <Button
-          variant="outline-danger"
-          size="sm"
-          className="ms-sm-2"
-          onClick={() => handleDelete(row)}
-        >
-          <BsPersonXFill />
-        </Button>
+        <OverlayTrigger overlay={tooltip} placement="bottom">
+          <Button
+            variant="outline-danger"
+            size="sm"
+            className="ms-sm-2"
+            onClick={() => handleDelete(row)}
+          >
+            <BsPersonXFill />
+          </Button>
+        </OverlayTrigger>
       </>
     ),
   }),
