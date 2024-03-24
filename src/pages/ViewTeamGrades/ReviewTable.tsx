@@ -1,13 +1,4 @@
 import React, { useState } from 'react';
-<<<<<<< Updated upstream
-import ReviewTableRow from './ReviewTableRow';
-import RoundSelector from './RoundSelector';
-import { dummyDataRounds} from './dummyData';
-import { calculateAverages, getColorClass } from './utils';
-import './grades.scss';
-import { Link } from 'react-router-dom';
-
-=======
 import ReviewTableRow from './ReviewTableRow'; // Importing the ReviewTableRow component
 import RoundSelector from './RoundSelector'; // Importing the RoundSelector component
 import dummyDataRounds from './Data/heatMapData.json'; // Importing dummy data for rounds
@@ -17,7 +8,6 @@ import './grades.scss'; // Importing styles
 import { Link } from 'react-router-dom'; // Importing Link from react-router-dom
 
 // Functional component ReviewTable
->>>>>>> Stashed changes
 const ReviewTable: React.FC = () => {
   const [currentRound, setCurrentRound] = useState<number>(0); // State for current round
   const [sortOrderRow, setSortOrderRow] = useState<'asc' | 'desc' | 'none'>('none'); // State for row sort order
@@ -47,18 +37,11 @@ const ReviewTable: React.FC = () => {
     setShowWordCount20(false);
   };
 
-<<<<<<< Updated upstream
-  return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold mb-2">Summary Report for assignment: Program 2</h2>
-      <h5 className="text-xl font-semibold mb-1">Team: Thala4AReason</h5>
-=======
   // JSX rendering of the ReviewTable component
   return (
     <div className="p-4">
       <h2 className="text-2xl font-bold mb-2">Summary Report for assignment: Program 2</h2>
       <h5 className="text-xl font-semibold mb-1">Team: {dummyData.team}</h5>
->>>>>>> Stashed changes
       <h5 className="mb-4">
         Average peer review score:{" "}
         <span className={getColorClass(parseFloat(averagePeerReviewScore), 100)}>{averagePeerReviewScore}</span>
@@ -125,23 +108,13 @@ const ReviewTable: React.FC = () => {
       </div>
       <p className="mt-4">
         <h3>Grade and comment for submission</h3>
-<<<<<<< Updated upstream
-        Grade: Grade for submission<br></br>
-        Comment: Comment for submission<br></br>
-        Late Penalty: 0<br></br>
-=======
         Grade: {dummyData.grade}<br></br>
         Comment: {dummyData.comment}<br></br>
         Late Penalty: {dummyData.late_penalty}<br></br>
->>>>>>> Stashed changes
       </p>
       <Link to="/">Back</Link>
     </div>
   );
 };
 
-<<<<<<< Updated upstream
-export default ReviewTable;
-=======
 export default ReviewTable; // Exporting the ReviewTable component as default
->>>>>>> Stashed changes
