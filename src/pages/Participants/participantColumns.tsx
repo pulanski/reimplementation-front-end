@@ -16,28 +16,28 @@ export const participantColumns = (handleEdit: Fn, handleDelete: Fn) => [
     enableSorting: false,
   }),
 
-  columnHelper.accessor("name", {
+  columnHelper.accessor("user.name", {
     header: "Participant Name",
     enableSorting: true,
   }),
 
-  columnHelper.accessor("full_name", {
+  columnHelper.accessor("user.full_name", {
     header: "Full Name",
     enableSorting: true,
     enableMultiSort: true,
   }),
 
-  columnHelper.accessor("email", {
+  columnHelper.accessor("user.email", {
     header: "Email",
   }),
 
-  columnHelper.accessor("role.name", {
+  columnHelper.accessor("user.role.name", {
     id: "role",
     header: "Role",
     enableColumnFilter: false,
   }),
 
-  columnHelper.accessor("parent.name", {
+  columnHelper.accessor("user.parent.name", {
     id: "parent",
     header: "Parent",
     enableColumnFilter: false,
@@ -47,19 +47,19 @@ export const participantColumns = (handleEdit: Fn, handleDelete: Fn) => [
     id: "email_preferences",
     header: "Email Preferences",
     columns: [
-      columnHelper.accessor("email_on_review", {
+      columnHelper.accessor("user.email_on_review", {
         header: "Review",
         enableSorting: false,
         enableColumnFilter: false,
         enableGlobalFilter: false,
       }),
-      columnHelper.accessor("email_on_submission", {
+      columnHelper.accessor("user.email_on_submission", {
         header: "Submission",
         enableSorting: false,
         enableColumnFilter: false,
         enableGlobalFilter: false,
       }),
-      columnHelper.accessor("email_on_review_of_review", {
+      columnHelper.accessor("user.email_on_review_of_review", {
         header: "Meta Review",
         enableSorting: false,
         enableColumnFilter: false,
@@ -67,7 +67,7 @@ export const participantColumns = (handleEdit: Fn, handleDelete: Fn) => [
       }),
     ],
   }),
-  columnHelper.accessor("institution.name", {
+  columnHelper.accessor("user.institution.name", {
     id: "institution",
     header: "Institution",
     enableColumnFilter: false,
@@ -77,9 +77,6 @@ export const participantColumns = (handleEdit: Fn, handleDelete: Fn) => [
     header: "Actions",
     cell: ({ row }) => (
       <>
-        <Button variant="outline-warning" size="sm" onClick={() => handleEdit(row)}>
-          <BsPencilFill />
-        </Button>
         <Button
           variant="outline-danger"
           size="sm"
