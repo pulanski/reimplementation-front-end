@@ -1,49 +1,74 @@
+/* Set the maximum width of the table container */
 .table-container {
-  max-width: 70%; /* Set the maximum width of the table container */
+  max-width: 70%;
 }
 
-/* These are the colors used for coloring
- * score cells within the heatgrid for the
- * grades view.
- */
+/* Circle around max score number */
+.circle-container {
+  display: flex;
+  align-items: center;
+}
 
-/* This is a null space in the table. Just leave
- * it the way it is for now.
- */
+.circle {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 1px solid orangered;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: orangered;
+  margin-left: -20px; /* Add margin to separate the circle from the text */
+}
+
+.tick{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: orangered;
+  margin-left: -15px; /* Add margin to separate the circle from the text */
+}
+
+/* Colors used for coloring score cells within the heatgrid for the grades view */
+
+/* Null space in the table */
 .c0 {
   background-color: #d3d3d3;
 }
 
-/* This is a red, indicative of a poor score. */
+/* Red, indicative of a poor score */
 .c1 {
   background-color: #ff8080;
 }
 
-/* This is an orange. */
+/* Orange */
 .c2 {
   background-color: #FD992D;
 }
 
-/* This is a yellow, indicative of a median score. */
+/* Yellow, indicative of a median score */
 .c3 {
   background-color: #FFEC8B;
 }
 
-/* This is a light green. */
+/* Light green */
 .c4 {
   background-color: #BCED91;
 }
 
-/* This is a green, indicative of a good score. */
+/* Green, indicative of a good score */
 .c5 {
   background-color: #2DE636;
 }
 
+/* Default background color */
 .cf {
   background-color: #FFFFFF;
 }
 
-/* To color the grades in the summary report  */
+/* Style for the grades in the summary report */
 .grade-circle {
   width: 30px;
   height: 30px;
@@ -54,73 +79,67 @@
   text-align: center;
 }
 
-/* To underline scores which have a comment. */
+/* Underline scores which have a comment */
 .underlined {
   text-decoration: underline;
   font-weight: bold;
 }
 
+/* Styling for the heatgrid table */
 .tbl_heat {
   border: 1px solid black;
-  width: 100%; /* Set the width of the table to 100% */
-  font-size: 10px; /* Adjust font size for table content */
-  text-align: center; /* Center align table content */
-  table-layout: fixed; /* Fix the layout of the table */
+  width: 100%;
+  font-size: 10px;
+  text-align: center;
+  table-layout: fixed;
 }
-
-// .tbl_heat td {
-//   cursor: pointer;
-//   padding: 8px; /* Adjust padding of table cells */
-//   border: 1px black solid;
-//   width: auto; /* Set the width of table cells to auto */
-//   font-size: 11px; /* Adjust font size for table data */
-//   table-layout: fixed;
-// }
 
 .tbl_heat td {
   cursor: pointer;
-  padding: 8px; /* Adjust padding of table cells */
+  padding: 8px;
   border: 1px black solid;
-  width: auto; /* Set the width of table cells to auto */
-  font-size: 11px; /* Adjust font size for table data */
+  width: auto;
+  font-size: 11px;
   table-layout: fixed;
-  position: relative; /* Required for absolute positioning */
+  position: relative;
 }
 
+/* Tooltip display for question text on hover */
 .tbl_heat td[data-question]:hover::after {
-  content: attr(data-question); /* Display the question text as a tooltip */
+  content: attr(data-question);
   position: absolute;
   background-color: rgba($color: #000000, $alpha: 1);
   color: #ffffff;
   padding: 4px;
   border-radius: 4px;
-  bottom: 130%; /* Position the tooltip above the td */
-  left: 0%; /* Center the tooltip horizontally */
-  //transform: translateX(-50%); /* Center the tooltip horizontally */
-  white-space: nowrap; /* Prevent tooltip from wrapping */
+  bottom: 130%;
+  left: 0%;
+  white-space: nowrap;
 }
 
-
+/* Styling for table headers */
 .tbl_heat th {
   border: 1px black solid;
-  padding: 10px; /* Adjust padding of table headers */
-  font-size: 11px; /* Adjust font size for table headers */
-  background-color: #f2f2f2; /* Background color for table headers */
-  //white-space: nowrap; /* Prevent wrapping of content */
-  width: auto; /* Set the width of table headers to auto */
+  padding: 10px;
+  font-size: 11px;
+  background-color: #f2f2f2;
+  width: auto;
   table-layout: fixed;
 }
 
+/* Hides padding for specific rows */
 .hiddenRow {
   padding: 0 !important;
 }
 
+/* Tooltip span styling */
 .spn_tooltip {
   padding-left: 30px;
   color: grey;
   font-size: small;
 }
 
+/* Styling for question toggle span */
 .spn_qsttog {
   padding-left: 30px;
   cursor: pointer;
@@ -129,9 +148,9 @@
   font-size: small;
 }
 
+/* Classes for E2100 Tag Reports for Students to style the new HeatGrid of review tags */
 
-// Add classes for E2100 Tag Reports for Students to style the new HeatGrid of review tags
-
+/* Styling for action row */
 .action_row {
   border: 1px black solid;
   padding: 1px 2px 2px 1px;
@@ -139,6 +158,7 @@
   text-align: center;
 }
 
+/* Styling for tag heat grid */
 .tag_heat_grid {
   padding: 0;
   spacing: 0;
@@ -150,24 +170,26 @@
   z-index: 2;
 }
 
+/* Styling for tag heat grid headers */
 .tag_heat_grid th {
   border: 1px solid black;
   font-size: 12px;
   cursor: pointer;
 }
 
+/* Styling for tag heat grid cells */
 .tag_heat_grid td {
   border: 0.5px solid black;
   font-size: 8px;
 }
 
+/* Styling for tag heat grid criterion */
 .tag_heat_grid_criterion {
   font-size: 11px !important;
   font-weight: bold !important;
 }
 
-// grades.scss
-
+/* Styles for the round selector */
 .round-selector {
   display: flex;
 }
@@ -193,6 +215,7 @@
     background-color: #2ecc71;
     border-color: #2ecc71;
   }
+
   .round-selector > div {
     display: flex;
     align-items: center;

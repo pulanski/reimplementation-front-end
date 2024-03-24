@@ -1,7 +1,9 @@
-import { ReviewData } from './dummyData';
+import { ReviewData } from './App';
 
+// Function to get color class based on score and maxScore
 export const getColorClass = (score: number, maxScore: number) => {
   let scoreColor = score;
+ 
   scoreColor = ((maxScore - scoreColor) / maxScore) * 100;
   if (scoreColor >= 80) return 'c1';
   else if (scoreColor >= 60 && scoreColor < 80) return 'c2';
@@ -11,18 +13,21 @@ export const getColorClass = (score: number, maxScore: number) => {
   else return 'cf';
 };
 
+// Function to get count of reviews with more than 10 words
 export const getWordCount10 = (row: ReviewData) => {
   return row.reviews.filter(
     (review) => review.comment && review.comment.trim().split(' ').length > 10
   ).length;
 };
 
+// Function to get count of reviews with more than 20 words
 export const getWordCount20 = (row: ReviewData) => {
   return row.reviews.filter(
     (review) => review.comment && review.comment.trim().split(' ').length > 20
   ).length;
 };
 
+// Function to calculate averages for rows and columns
 export const calculateAverages = (
   currentRoundData: ReviewData[],
   sortOrderRow: 'asc' | 'desc' | 'none'
