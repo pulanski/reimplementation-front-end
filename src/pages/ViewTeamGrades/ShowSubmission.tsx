@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Button, Collapse } from 'react-bootstrap';
 
+// Component to show submission links with collapsible functionality
 const ShowSubmission = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false); // State to manage collapsible content
 
   return (
     <>
+      {/* Button to toggle the collapsible content */}
       <Button
         onClick={() => setOpen(!open)}
         aria-controls="example-collapse-text"
@@ -13,11 +15,14 @@ const ShowSubmission = () => {
       >
         Show Submission
       </Button>
+
+      {/* Collapsible content */}
       <Collapse in={open}>
         <div id="example-collapse-text">
           <br></br>
 
-          {open && (  // Render links only when open is true
+          {/* Render links only when open is true */}
+          {open && (
             <>
               <a
                 href="https://github.ncsu.edu/Program-2-Ruby-on-Rails/WolfEvents"

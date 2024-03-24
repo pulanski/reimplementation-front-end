@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+<<<<<<< Updated upstream
 import ReviewTableRow from './ReviewTableRow';
 import RoundSelector from './RoundSelector';
 import { dummyDataRounds} from './dummyData';
@@ -6,12 +7,24 @@ import { calculateAverages, getColorClass } from './utils';
 import './grades.scss';
 import { Link } from 'react-router-dom';
 
-const ReviewTable: React.FC = () => {
-  const [currentRound, setCurrentRound] = useState<number>(0);
-  const [sortOrderRow, setSortOrderRow] = useState<'asc' | 'desc' | 'none'>('none');
-  const [showWordCount10, setShowWordCount10] = useState(false);
-  const [showWordCount20, setShowWordCount20] = useState(false);
+=======
+import ReviewTableRow from './ReviewTableRow'; // Importing the ReviewTableRow component
+import RoundSelector from './RoundSelector'; // Importing the RoundSelector component
+import dummyDataRounds from './Data/heatMapData.json'; // Importing dummy data for rounds
+import dummyData from './Data/dummyData.json'; // Importing dummy data
+import { calculateAverages, getColorClass } from './utils'; // Importing utility functions
+import './grades.scss'; // Importing styles
+import { Link } from 'react-router-dom'; // Importing Link from react-router-dom
 
+// Functional component ReviewTable
+>>>>>>> Stashed changes
+const ReviewTable: React.FC = () => {
+  const [currentRound, setCurrentRound] = useState<number>(0); // State for current round
+  const [sortOrderRow, setSortOrderRow] = useState<'asc' | 'desc' | 'none'>('none'); // State for row sort order
+  const [showWordCount10, setShowWordCount10] = useState(false); // State for showing reviews with more than 10 words
+  const [showWordCount20, setShowWordCount20] = useState(false); // State for showing reviews with more than 20 words
+
+  // Function to toggle the sort order for rows
   const toggleSortOrderRow = () => {
     setSortOrderRow((prevSortOrder) => {
       if (prevSortOrder === 'asc') return 'desc';
@@ -20,26 +33,38 @@ const ReviewTable: React.FC = () => {
     });
   };
 
+  // Calculating averages and sorting data based on the current round and sort order
   const currentRoundData = dummyDataRounds[currentRound];
   const { averagePeerReviewScore, columnAverages, sortedData } = calculateAverages(
     currentRoundData,
     sortOrderRow
   );
 
+  // Function to handle round change
   const handleRoundChange = (roundIndex: number) => {
     setCurrentRound(roundIndex);
     setShowWordCount10(false);
     setShowWordCount20(false);
   };
 
+<<<<<<< Updated upstream
   return (
     <div className="p-4">
       <h2 className="text-2xl font-bold mb-2">Summary Report for assignment: Program 2</h2>
       <h5 className="text-xl font-semibold mb-1">Team: Thala4AReason</h5>
+=======
+  // JSX rendering of the ReviewTable component
+  return (
+    <div className="p-4">
+      <h2 className="text-2xl font-bold mb-2">Summary Report for assignment: Program 2</h2>
+      <h5 className="text-xl font-semibold mb-1">Team: {dummyData.team}</h5>
+>>>>>>> Stashed changes
       <h5 className="mb-4">
-        Average peer review score:{' '}
+        Average peer review score:{" "}
         <span className={getColorClass(parseFloat(averagePeerReviewScore), 100)}>{averagePeerReviewScore}</span>
       </h5>
+      <h4 className="text-xl font-semibold mb-1">Review (Round: {currentRound + 1} of {dummyDataRounds.length}) </h4>
+      <br></br>
       <form>
         <input
           type="checkbox"
@@ -59,7 +84,6 @@ const ReviewTable: React.FC = () => {
         <label htmlFor="wordCount20"> &nbsp;More than 20 words</label>
       </form>
       <div className="table-container">
-        <br></br>
         <table className="tbl_heat">
           <thead>
           <tr className="bg-gray-200">
@@ -101,13 +125,23 @@ const ReviewTable: React.FC = () => {
       </div>
       <p className="mt-4">
         <h3>Grade and comment for submission</h3>
+<<<<<<< Updated upstream
         Grade: Grade for submission<br></br>
         Comment: Comment for submission<br></br>
         Late Penalty: 0<br></br>
+=======
+        Grade: {dummyData.grade}<br></br>
+        Comment: {dummyData.comment}<br></br>
+        Late Penalty: {dummyData.late_penalty}<br></br>
+>>>>>>> Stashed changes
       </p>
       <Link to="/">Back</Link>
     </div>
   );
 };
 
+<<<<<<< Updated upstream
 export default ReviewTable;
+=======
+export default ReviewTable; // Exporting the ReviewTable component as default
+>>>>>>> Stashed changes
