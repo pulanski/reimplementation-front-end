@@ -71,7 +71,7 @@ export async function loadParticipantDataRolesAndInstitutions({ params }: any) {
   let participantData = {};
   // if params contains id, then we are editing a participant, so we need to load the participant data
   if (params.id) {
-    const participantResponse = await axiosClient.get(/participants/${params.id}, {
+    const participantResponse = await axiosClient.get(`/participants/${params.id}`, {
       transformResponse: transformParticipantResponse,
     });
     participantData = await participantResponse.data;

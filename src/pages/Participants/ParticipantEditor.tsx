@@ -52,10 +52,10 @@ const ParticipantEditor: React.FC<IParticipantEditor> = ({ mode, type }) => {
       dispatch(
         alertActions.showAlert({
           variant: "success",
-          message: Participant ${participantData.name} ${mode}d successfully!,
+          message: `Participant ${participantData.name} ${mode}d successfully!`,
         })
       );
-      navigate(location.state?.from ? location.state.from : /${type}/${typeId}/participants);
+      navigate(location.state?.from ? location.state.from : `/${type}/${typeId}/participants`);
     }
   }, [dispatch, mode, navigate, participantData.name, participantResponse, location.state?.from, type]);
 
@@ -69,7 +69,7 @@ const ParticipantEditor: React.FC<IParticipantEditor> = ({ mode, type }) => {
     let url: string = "/participants";
 
     if (mode === "update") {
-      url = /participants/${values.id};
+      url = `/participants/${values.id}`;
       method = HttpMethod.PATCH;
     }
 
@@ -94,7 +94,7 @@ const ParticipantEditor: React.FC<IParticipantEditor> = ({ mode, type }) => {
     submitProps.setSubmitting(false);
   };
 
-  const handleClose = () => navigate(location.state?.from ? location.state.from : /${type}/${typeId}/participants);  
+  const handleClose = () => navigate(location.state?.from ? location.state.from : `/${type}/${typeId}/participants`);  
 
   return (
     <Modal size="lg" centered show={true} onHide={handleClose} backdrop="static">

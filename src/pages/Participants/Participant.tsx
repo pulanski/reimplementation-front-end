@@ -37,7 +37,7 @@ const Participants: React.FC<IModel> = ({ type}) => {
   }>({ visible: false });
 
   useEffect(() => {
-    if (!showDeleteConfirmation.visible) fetchParticipants({ url: /${type}/${typeId}/participants });
+    if (!showDeleteConfirmation.visible) fetchParticipants({ url: `/${type}/${typeId}/participants` });
   }, [fetchParticipants, location, showDeleteConfirmation.visible, auth.user.id, type, typeId]);
 
   // Error alert
@@ -50,7 +50,7 @@ const Participants: React.FC<IModel> = ({ type}) => {
   const onDeleteParticipantHandler = useCallback(() => setShowDeleteConfirmation({ visible: false }), []);
 
   const onEditHandle = useCallback(
-    (row: TRow<IParticipantResponse>) => navigate(/${type}/${typeId}/participants/edit/${row.original.id}),
+    (row: TRow<IParticipantResponse>) => navigate(`/${type}/${typeId}/participants/edit/${row.original.id}`),
     [navigate, type,typeId]
   );
 
