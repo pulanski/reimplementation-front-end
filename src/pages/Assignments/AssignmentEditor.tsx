@@ -177,28 +177,28 @@ const AssignmentEditor: React.FC<IEditor> = ({ mode }) => {
                 <FontAwesomeIcon icon={faUser} className="icon" />
                 <span>Add Participant</span>
               </div>
-              <div className="custom-tab-button" onClick={() => navigate('/createteams/new')}>
+              <div className="custom-tab-button" onClick={() => navigate(`/assignments/edit/${assignmentData.id}/createteams`)}>
                 <FontAwesomeIcon icon={faUsers} className="icon" />
                 <span>Create Teams</span>
               </div>
 
-              <div className="custom-tab-button" onClick={() => navigate('/assignreviewer/new')}>
+              <div className="custom-tab-button" onClick={() => navigate(`/assignments/edit/${assignmentData.id}/assignreviewer`)}>
                 <FontAwesomeIcon icon={faUserCheck} className="icon" />
                 <span>Assign Reviewer</span>
               </div>
-              <div className="custom-tab-button" onClick={() => navigate('/viewsubmissions/new')}>
+              <div className="custom-tab-button" onClick={() => navigate(`/assignments/edit/${assignmentData.id}/viewsubmissions`)}>
                 <FontAwesomeIcon icon={faClipboardList} className="icon" />
                 <span>View Submissions</span>
               </div>
-              <div className="custom-tab-button" onClick={() => navigate('/viewscores/new')}>
+              <div className="custom-tab-button" onClick={() => navigate(`/assignments/edit/${assignmentData.id}/viewscores`)}>
                 <FontAwesomeIcon icon={faChartBar} className="icon" />
                 <span>View Scores</span>
               </div>
-              <div className="custom-tab-button" onClick={() => navigate('/viewreports/new')}>
+              <div className="custom-tab-button" onClick={() => navigate(`/assignments/edit/${assignmentData.id}/viewreports`)}>
                 <FontAwesomeIcon icon={faFileAlt} className="icon" />
                 <span>View Reports</span>
               </div>
-              <div className="custom-tab-button" onClick={() => navigate('/viewdelayedjobs/new')}>
+              <div className="custom-tab-button" onClick={() => navigate(`/assignments/edit/${assignmentData.id}/viewdelayedjobs`)}>
                 <FontAwesomeIcon icon={faClock} className="icon" />
                 <span>View Delayed Jobs</span>
               </div>

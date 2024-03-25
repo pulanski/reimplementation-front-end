@@ -48,29 +48,35 @@ function App() {
         { path: "logout", element: <ProtectedRoute element={<Logout />} /> },
         { path: "edit-questionnaire", element: <ProtectedRoute element={<Questionnaire />} /> },
         {
-          path: "createteams/new",
+          path: "assignments/edit/:id/createteams",
           element: <CreateTeams />,
+          loader: loadAssignment,
         },
         
         {
-          path: "assignreviewer/new",
+          path: "assignments/edit/:id/assignreviewer",
           element: <AssignReviewer />,
+          loader: loadAssignment,
         },
         {
-          path: "viewsubmissions/new",
+          path: "assignments/edit/:id/viewsubmissions",
           element: <ViewSubmissions />,
+          loader: loadAssignment,
         },
         {
-          path: "viewscores/new",
+          path: "assignments/edit/:id/viewscores",
           element: <ViewScores />,
+          loader: loadAssignment,
         },
         {
-          path: "viewreports/new",
+          path: "assignments/edit/:id/viewreports",
           element: <ViewReports />,
+          loader: loadAssignment,
         },
         {
-          path: "viewdelayedjobs/new",
+          path: "assignments/edit/:id/viewdelayedjobs",
           element: <ViewDelayedJobs />,
+          loader: loadAssignment,
         },
         {
           path: "assignments",
