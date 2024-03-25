@@ -3,6 +3,7 @@ import { Button, Container, Row, Col } from 'react-bootstrap';
 // import { useNavigate } from 'react-router-dom';
 import Table from "components/Table/Table";
 import { createColumnHelper } from "@tanstack/react-table";
+import { useLoaderData } from 'react-router-dom';
 
 interface ISubmission {
   id: number;
@@ -12,6 +13,7 @@ interface ISubmission {
 const columnHelper = createColumnHelper<ISubmission>();
 
 const ViewSubmissions: React.FC = () => {
+  const assignment: any = useLoaderData();
   // const navigate = useNavigate();
 
   // Dummy data for submissions
@@ -53,7 +55,7 @@ const ViewSubmissions: React.FC = () => {
       </div>
       <Row className="mt-md-2 mb-md-2">
         <Col className="text-center">
-          <h1>View Submissions</h1>
+          <h1>View Submissions - {assignment.name}</h1>
         </Col>
         <hr />
       </Row>

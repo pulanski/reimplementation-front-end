@@ -3,6 +3,7 @@ import { Button, Container, Row, Col } from 'react-bootstrap';
 // import { useNavigate } from 'react-router-dom';
 import Table from "components/Table/Table";
 import { createColumnHelper } from "@tanstack/react-table";
+import { useLoaderData } from 'react-router-dom';
 
 interface IReport {
   id: number;
@@ -13,6 +14,7 @@ interface IReport {
 const columnHelper = createColumnHelper<IReport>();
 
 const ViewReports: React.FC = () => {
+  const assignment: any = useLoaderData();
   // const navigate = useNavigate();
 
   // Dummy data for reports
@@ -58,7 +60,7 @@ const ViewReports: React.FC = () => {
       </div>
       <Row className="mt-md-2 mb-md-2">
         <Col className="text-center">
-          <h1>View Reports</h1>
+          <h1>View Reports - {assignment.name}</h1>
         </Col>
         <hr />
       </Row>

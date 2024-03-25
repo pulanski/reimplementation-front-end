@@ -3,6 +3,7 @@ import { Button, Container, Row, Col, Modal, Form } from 'react-bootstrap';
 import Table from "components/Table/Table";
 import { createColumnHelper } from "@tanstack/react-table";
 import { BsFileText, BsPencilFill, BsPersonXFill } from "react-icons/bs";
+import { useLoaderData } from 'react-router-dom';
 
 interface Participant {
   name: string;
@@ -31,6 +32,7 @@ const initialTeams: Team[] = [
 const columnHelper = createColumnHelper<Team>();
 
 const CreateTeams: React.FC = () => {
+  const assignment: any = useLoaderData();
   const [teams, setTeams] = useState<Team[]>(initialTeams);
   const [teamNameEdit, setTeamNameEdit] = useState('');
   const [participants, setParticipants] = useState<Participant[]>(initialParticipants);
@@ -152,7 +154,7 @@ const CreateTeams: React.FC = () => {
     <Container fluid className="px-md-4">
       <Row className="mt-md-2 mb-md-2">
         <Col className="text-center">
-          <h1>Teams</h1>
+          <h1>Teams - {assignment.name}</h1>
         </Col>
         <hr />
       </Row>

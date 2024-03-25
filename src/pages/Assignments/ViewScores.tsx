@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { Button, Container, Row, Col, Modal } from 'react-bootstrap';
 import Table from "components/Table/Table";
 import { createColumnHelper } from "@tanstack/react-table";
+import { useLoaderData } from 'react-router-dom';
 import { BsGraphUp } from 'react-icons/bs';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
@@ -14,6 +15,7 @@ interface IScore {
 const columnHelper = createColumnHelper<IScore>();
 
 const ViewScores: React.FC = () => {
+  const assignment: any = useLoaderData();
   const [showGraph, setShowGraph] = useState(false);
 
   const scores = useMemo(() => [
@@ -70,7 +72,7 @@ const ViewScores: React.FC = () => {
       </div>
       <Row className="mt-md-2 mb-md-2">
         <Col className="text-center">
-          <h1>View Scores</h1>
+          <h1>View Scores - {assignment.name}</h1>
         </Col>
         <hr />
       </Row>

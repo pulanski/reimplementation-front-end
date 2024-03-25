@@ -3,6 +3,7 @@ import { Button, Container, Row, Col } from 'react-bootstrap';
 // import { useNavigate } from 'react-router-dom';
 import Table from "components/Table/Table";
 import { createColumnHelper } from "@tanstack/react-table";
+import { useLoaderData } from 'react-router-dom';
 
 interface IDelayedJob {
   id: number;
@@ -13,6 +14,7 @@ interface IDelayedJob {
 const columnHelper = createColumnHelper<IDelayedJob>();
 
 const ViewDelayedJobs: React.FC = () => {
+  const assignment: any = useLoaderData();
   // const navigate = useNavigate();
 
   // Dummy data for delayed jobs
@@ -58,7 +60,7 @@ const ViewDelayedJobs: React.FC = () => {
       </div>
       <Row className="mt-md-2 mb-md-2">
         <Col className="text-center">
-          <h1>View Delayed Jobs</h1>
+          <h1>View Delayed Jobs - {assignment.name}</h1>
         </Col>
         <hr />
       </Row>

@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { Button, Container, Row, Col } from 'react-bootstrap';
 // import { useNavigate } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 import Table from "components/Table/Table";
 import { createColumnHelper } from "@tanstack/react-table";
 
@@ -12,6 +13,7 @@ interface IReviewer {
 const columnHelper = createColumnHelper<IReviewer>();
 
 const AssignReviewer: React.FC = () => {
+  const assignment: any = useLoaderData();
   // const navigate = useNavigate();
 
   // Dummy data for reviewers
@@ -61,7 +63,7 @@ const AssignReviewer: React.FC = () => {
       </div>
       <Row className="mt-md-2 mb-md-2">
         <Col className="text-center">
-          <h1>Assign Reviewer</h1>
+          <h1>Assign Reviewer - {assignment.name}</h1>
         </Col>
         <hr />
       </Row>
