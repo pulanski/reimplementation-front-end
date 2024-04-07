@@ -127,6 +127,14 @@ const AssignmentEditor: React.FC<IEditor> = ({ mode }) => {
     setRows(newRows);
   };
 
+  const handleTabSelect = (tab: any) => {
+    setActiveTab(tab);
+  };
+
+  const getTabTitleStyle = (tab: any) => {
+    return tab === activeTab ? { color: "#FFD700" } : { color: "red" };
+  };
+
   return (
     <div>
       <Container>
@@ -150,7 +158,10 @@ const AssignmentEditor: React.FC<IEditor> = ({ mode }) => {
                   activeKey={activeTab}
                   onSelect={(key: string | null) => setActiveTab(key ?? "inputs")} // Handle tab selection
                 >
-                  <Tab eventKey="general" title="General">
+                  <Tab
+                    eventKey="general"
+                    title={<span style={getTabTitleStyle("general")}>General</span>}
+                  >
                     <FormGroup>
                       <FormInput controlId="assignment-name" label="Assignment Name" name="name" />
                       <FormGroup controlId="course-name">
@@ -208,20 +219,20 @@ const AssignmentEditor: React.FC<IEditor> = ({ mode }) => {
                         id="auto-assign-mentors"
                         type="checkbox"
                         name="auto-assign-mentors"
-                        label="Auto assign mentors when team hits > 50% capacity?"
+                        label="Auto-assign mentors when team hits > 50% capacity?"
                       />
-                      <FormCheck id="has-quiz" type="checkbox" name="has-quiz" label="Has quiz" />
+                      <FormCheck id="has-quiz" type="checkbox" name="has-quiz" label="Has quiz?" />
                       <FormCheck
                         id="has-badge"
                         type="checkbox"
                         name="has-badge"
-                        label="Has badge"
+                        label="Has badge?"
                       />
                       <FormCheck
-                        id="pair-programming"
+                        id="review-paper-for-conference"
                         type="checkbox"
-                        name="pair-programming"
-                        label="Pair Programming?"
+                        name="review-paper-for-conference"
+                        label="Will this assignment be used to review papers for conference?"
                       />
                       <FormCheck
                         id="has-topics"
@@ -230,16 +241,10 @@ const AssignmentEditor: React.FC<IEditor> = ({ mode }) => {
                         label="Has topics"
                       />
                       <FormCheck
-                        id="review-paper-for-conference"
-                        type="checkbox"
-                        name="review-paper-for-conference"
-                        label="Will this assignment be used to review paper for conference?"
-                      />
-                      <FormCheck
                         id="staggered-deadline-assignment"
                         type="checkbox"
                         name="staggered-deadline-assignment"
-                        label="Staggered deadline assignment"
+                        label="Staggered-deadline assignment"
                       />
                       <FormCheck
                         id="micro-task-assignment"
@@ -251,7 +256,7 @@ const AssignmentEditor: React.FC<IEditor> = ({ mode }) => {
                         id="review-visible"
                         type="checkbox"
                         name="review-visible"
-                        label="Reviews visible to all the reviewers"
+                        label="Review visible to all the reviewers"
                       />
                       <FormCheck
                         id="calibration-training"
@@ -267,18 +272,18 @@ const AssignmentEditor: React.FC<IEditor> = ({ mode }) => {
                         <FormControl
                           as="select"
                           name="reputation-algorithm"
-                          style={{ width: "80px" }}
+                          style={{ width: "110px" }}
                         >
+                          <option value="default">Not Selected</option>
                           <option value="lauw">Lauw</option>
                           <option value="course2">Course 2</option>
-                          <option value="course3">Course 3</option>
                         </FormControl>
                       </FormGroup>
                       <FormCheck
                         id="use-simicheck"
                         type="checkbox"
                         name="use-simicheck"
-                        label="Use simicheck"
+                        label="Use simicheck for plagiarism detection"
                       />
                       <FormCheck
                         id="allow-tag-prompts"
@@ -294,7 +299,10 @@ const AssignmentEditor: React.FC<IEditor> = ({ mode }) => {
                       />
                     </FormGroup>
                   </Tab>
-                  <Tab eventKey="topics" title="Topics">
+                  <Tab
+                    eventKey="topics"
+                    title={<span style={getTabTitleStyle("topics")}>Topics</span>}
+                  >
                     <FormGroup>
                       <FormCheck
                         id="topic-suggestion"
@@ -335,35 +343,40 @@ const AssignmentEditor: React.FC<IEditor> = ({ mode }) => {
                       <Button onClick={toggleTeamTableVisibility}>
                         {isTeamTableVisible ? "Hide Table" : "Show Table"}
                       </Button>
-                      {isTeamTableVisible && (
-                        <Table striped="columns">
-                          <thead>
-                            <tr>
-                              <th>Checkbox</th>
-                              <th>Topic ID</th>
-                              <th>Topic name(s)</th>
-                              <th>Number of slots</th>
-                              <th>Available slots</th>
-                              <th>Num of waitlist</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>
-                                <input type="checkbox"></input>
-                              </td>
-                              <td>E21222</td>
-                              <td>Refactor impersonate_controller.rb</td>
-                              <td>1</td>
-                              <td>0</td>
-                              <td>1</td>
-                            </tr>
-                          </tbody>
-                        </Table>
-                      )}
+                      <div style={{ maxWidth: "800px" }}>
+                        {isTeamTableVisible && (
+                          <Table striped="columns" style={{ tableLayout: "auto" }}>
+                            <thead>
+                              <tr>
+                                <th>Checkbox</th>
+                                <th>Topic ID</th>
+                                <th>Topic name(s)</th>
+                                <th>Number of slots</th>
+                                <th>Available slots</th>
+                                <th>Num of waitlist</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <input type="checkbox"></input>
+                                </td>
+                                <td>E21222</td>
+                                <td>Refactor impersonate_controller.rb</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>1</td>
+                              </tr>
+                            </tbody>
+                          </Table>
+                        )}
+                      </div>
                     </FormGroup>
                   </Tab>
-                  <Tab eventKey="rubrics" title="Rubrics">
+                  <Tab
+                    eventKey="rubrics"
+                    title={<span style={getTabTitleStyle("rubrics")}>Rubrics</span>}
+                  >
                     <FormGroup>
                       <FormCheck
                         id="topic-suggestion"
@@ -510,7 +523,10 @@ const AssignmentEditor: React.FC<IEditor> = ({ mode }) => {
                       </Table>
                     </FormGroup>
                   </Tab>
-                  <Tab eventKey="review-strategy" title="Review Strategy">
+                  <Tab
+                    eventKey="review-strategy"
+                    title={<span style={getTabTitleStyle("review-strategy")}>Review Strategy</span>}
+                  >
                     <FormGroup
                       controlId="max-team-members"
                       style={{ display: "flex", flexDirection: "row" }}
@@ -601,7 +617,10 @@ const AssignmentEditor: React.FC<IEditor> = ({ mode }) => {
                       label="Allow reviews to be begun in later rounds."
                     />
                   </Tab>
-                  <Tab eventKey="due-date" title="Due Date">
+                  <Tab
+                    eventKey="due-date"
+                    title={<span style={getTabTitleStyle("due-date")}>Due date</span>}
+                  >
                     <FormGroup>
                       <FormGroup
                         controlId="review-rounds"
@@ -645,69 +664,7 @@ const AssignmentEditor: React.FC<IEditor> = ({ mode }) => {
                       <Button onClick={toggleTableVisibility}>
                         {isTableVisible ? "Hide Table" : "Show Table"}
                       </Button>
-                      {isTableVisible && (
-                        <Table striped>
-                          <thead>
-                            <tr>
-                              <th>Deadline type</th>
-                              <th>Date &amp; time</th>
-                              <th>User Date Updater</th>
-                              <th>Submission allowed</th>
-                              <th>Review allowed</th>
-                              <th>Teammate review allowed</th>
-                              <th>Meta review allowed</th>
-                              <th>Reminder (hrs)</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>Round 1: submission</td>
-                              <td>
-                                <input type="date" />
-                              </td>
-                              <td>
-                                <select>
-                                  <option value="yes">Yes</option>
-                                  <option value="no">No</option>
-                                </select>
-                              </td>
-                              <td>
-                                <select>
-                                  <option value="yes">Yes</option>
-                                  <option value="no">No</option>
-                                </select>
-                              </td>
-                              <td>
-                                <select>
-                                  <option value="yes">Yes</option>
-                                  <option value="no">No</option>
-                                </select>
-                              </td>
-                              <td>
-                                <select>
-                                  <option value="yes">Yes</option>
-                                  <option value="no">No</option>
-                                </select>
-                              </td>
-                              <td>
-                                <select>
-                                  <option value="yes">Yes</option>
-                                  <option value="no">No</option>
-                                </select>
-                              </td>
-                              <td>
-                                <select>
-                                  {[...Array(24).keys()].map((hour) => (
-                                    <option key={hour} value={hour + 1}>
-                                      {hour + 1}
-                                    </option>
-                                  ))}
-                                </select>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </Table>
-                      )}
+                      <div></div>
                       <FormCheck
                         id="apply-late-policy"
                         type="checkbox"
@@ -719,20 +676,24 @@ const AssignmentEditor: React.FC<IEditor> = ({ mode }) => {
                         className="d-flex align-items-center"
                       >
                         <FormLabel className="mr-2 mb-0">Apply late policy</FormLabel>
-                        <FormControl as="select" className="custom-select custom-select-sm">
+                        <FormControl
+                          as="select"
+                          className="custom-select custom-select-sm"
+                          style={{ width: "100px" }}
+                        >
                           <option value="none">None</option>
                           <option value="deadline1">Late Deadline1</option>
                         </FormControl>
                       </FormGroup>
                     </FormGroup>
                   </Tab>
-                  <Tab eventKey="etc" title="Etc">
+                  <Tab eventKey="etc" title={<span style={getTabTitleStyle("etc")}>Etc.</span>}>
                     <Container>
                       <div className="row">
                         <div className="col-sm-6 col-md-4 col-lg-3 mb-3">
                           <Button
                             variant="primary"
-                            style={{ fontSize: "1.2rem", padding: "10px 20px" }}
+                            style={{ fontSize: "1.2rem", padding: "6px 10px" }}
                           >
                             <img
                               src="/assets/icons/add-participant-24.png"
@@ -746,7 +707,7 @@ const AssignmentEditor: React.FC<IEditor> = ({ mode }) => {
                         <div className="col-sm-6 col-md-4 col-lg-3 mb-3">
                           <Button
                             variant="primary"
-                            style={{ fontSize: "1.2rem", padding: "10px 20px" }}
+                            style={{ fontSize: "1.2rem", padding: "6px 10px" }}
                           >
                             <img
                               src="/assets/icons/create-teams-24.png"
@@ -760,7 +721,7 @@ const AssignmentEditor: React.FC<IEditor> = ({ mode }) => {
                         <div className="col-sm-6 col-md-4 col-lg-3 mb-3">
                           <Button
                             variant="primary"
-                            style={{ fontSize: "1.2rem", padding: "10px 20px" }}
+                            style={{ fontSize: "1.2rem", padding: "6px 10px" }}
                           >
                             <img
                               src="/assets/icons/assign-reviewers-96.png"
@@ -774,7 +735,7 @@ const AssignmentEditor: React.FC<IEditor> = ({ mode }) => {
                         <div className="col-sm-6 col-md-4 col-lg-3 mb-3">
                           <Button
                             variant="primary"
-                            style={{ fontSize: "1.2rem", padding: "10px 20px" }}
+                            style={{ fontSize: "1.2rem", padding: "6px 10px" }}
                           >
                             <img
                               src="/assets/icons/view-submissions-24.png"
@@ -788,7 +749,7 @@ const AssignmentEditor: React.FC<IEditor> = ({ mode }) => {
                         <div className="col-sm-6 col-md-4 col-lg-3 mb-3">
                           <Button
                             variant="primary"
-                            style={{ fontSize: "1.2rem", padding: "10px 20px" }}
+                            style={{ fontSize: "1.2rem", padding: "6px 10px" }}
                           >
                             <img
                               src="/assets/icons/view-scores-24.png"
@@ -802,7 +763,7 @@ const AssignmentEditor: React.FC<IEditor> = ({ mode }) => {
                         <div className="col-sm-6 col-md-4 col-lg-3 mb-3">
                           <Button
                             variant="primary"
-                            style={{ fontSize: "1.2rem", padding: "10px 20px" }}
+                            style={{ fontSize: "1.2rem", padding: "6px 10px" }}
                           >
                             <img
                               src="/assets/icons/view-delayed-mailer.png"

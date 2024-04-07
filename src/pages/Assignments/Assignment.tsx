@@ -95,7 +95,7 @@ const Assignments = () => {
     <>
       <Outlet />
       <main>
-        {location.pathname.indexOf("/edit/") === -1 && (
+        {location.pathname.indexOf("/edit/") === -1 && location.pathname !== "/assignments/new" && (
           <Container fluid className="px-md-4">
             <Row className="mt-md-2 mb-md-2">
               <Col className="text-center">
