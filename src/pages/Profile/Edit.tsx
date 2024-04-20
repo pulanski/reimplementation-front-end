@@ -79,10 +79,10 @@ const Edit: React.FC = () => {
               </Field>
             </div>
 
-            <div className="form-field action-preference">
-              <label>Action Preference:</label>
+            <div className="form-field action-preference custom-column-flex">
+              <label style={{ fontWeight: 800 }}>Action Preference:</label>
               <div className="radio-group">
-                <label>
+                <label style={{ marginRight: 8 }}>
                   <Field type="radio" name="actionPreference" value="canShowActions" />
                   Homepage can show actions
                 </label>
@@ -94,8 +94,16 @@ const Edit: React.FC = () => {
               <ErrorMessage name="actionPreference" component="div" className="error-message" />
             </div>
 
-            <div className="form-field">
-              <label htmlFor="handle">Handle:</label>
+            <hr />
+
+            <div className='custom-column-flex'>
+                <label style={{ fontWeight: 800 }}>Handle</label>
+                <div>A "handle" can be used to conceal your username from people who view your wiki pages. If you have a handle, your wiki account should be named after your handle instead of after your user-ID. If you do not have a handle, your Expertiza user-ID will be used instead. A blank entry in the field below will cause the handle to be set back to your Expertiza user-ID. <div style={{ marginTop: -12 }}><br /></div>
+                Note: By using this form, you are changing your default handle, which will be used for all future assignments. To change your handle for a specific assignment, select that assignment and choose the Change Handle action.</div>
+            </div>
+
+            <div className="form-field" style={{ marginTop: 28 }}>
+              <label htmlFor="handle">Default Handle:</label>
               <Field type="text" name="handle" />
               <ErrorMessage name="handle" component="div" className="error-message" />
             </div>

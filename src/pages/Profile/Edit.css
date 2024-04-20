@@ -14,7 +14,7 @@
   .form-field label {
     flex-basis: 22%; /* Adjust width of label */
     color: #333;
-    font-size: 16px;
+    font-size: 14px;
   }
   
   .form-field input[type="text"],
@@ -30,9 +30,16 @@
   }
   
   .form-field button {
-    background-color: #007bff;
-    color: #fff;
+    color: #6c757d;
     cursor: pointer;
+    background-color: transparent;
+    border: #6c757d 1px solid;
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+
+  .form-field button:hover{
+    background-color: white !important;
   }
   
   .form-field button:hover {
@@ -40,7 +47,7 @@
   }
   
   .h2-user-profile{
-    margin-bottom: 16px;
+    margin-bottom: 40px;
   }
 
   .italics > p {
@@ -48,4 +55,11 @@
     font-size: 11px;
     margin-top: 12px;
     margin-bottom: 8px;
+  }
+
+  .custom-column-flex{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
   }
