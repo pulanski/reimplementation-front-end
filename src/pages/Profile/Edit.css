@@ -1,0 +1,42 @@
+.edit-form-container {
+    max-width: 600px;
+    margin: 20px 0 0 20px;
+    padding: 40px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .form-field {
+    margin-bottom: 20px;
+    display: flex; /* Use flexbox */
+    align-items: center; /* Align items vertically */
+  }
+  
+  .form-field label {
+    flex-basis: 30%; /* Adjust width of label */
+    color: #333;
+    font-size: 16px;
+  }
+  
+  .form-field input[type="text"],
+  .form-field input[type="password"],
+  .form-field input[type="email"],
+  .form-field select {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .form-field button {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .form-field button:hover {
+    background-color: #0056b3;
+  }
+  

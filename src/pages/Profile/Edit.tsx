@@ -1,215 +1,123 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
-
-interface UserProfileFormData {
-  fullName: string;
-  password: string;
-  email: string;
-  institution: string;
-  emailOptions: {
-    reviewsMyWork: boolean;
-    submitsWork: boolean;
-    metaReviewsMyWork: boolean;
-  };
-  actionPreference: string;
-  handle: string;
-  timeZone: string;
-  language: string;
-}
+import React from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import './Edit.css'; // Make sure to import the CSS file
 
 const Edit: React.FC = () => {
-  const [formData, setFormData] = useState<UserProfileFormData>({
+  const initialValues = {
     fullName: '',
     password: '',
+    confirmPassword: '',
     email: '',
-    institution: 'Other',
-    emailOptions: {
-      reviewsMyWork: false,
-      submitsWork: false,
-      metaReviewsMyWork: false,
-    },
-    actionPreference: 'canShowActions',
+    institution: 'North Carolina State University',
+    actionPreference: 'cannotShowActions',
     handle: '',
-    timeZone: 'Eastern Time',
+    timeZone: 'GMT-05:00',
     language: 'No Preference',
+  };
+
+  const validationSchema = Yup.object().shape({
+    fullName: Yup.string().required('Full name is required'),
+    password: Yup.string().required('Password is required'),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref('password')], 'Passwords must match')
+      .required('Confirm Password is required'),
+    email: Yup.string().email('Invalid email address').required('Email is required'),
+    handle: Yup.string().required('Handle is required'),
   });
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? (target as HTMLInputElement).checked : target.value;
-    const name = target.name;
-  
-    if (target.type === 'checkbox') {
-      setFormData({
-        ...formData,
-        emailOptions: {
-          ...formData.emailOptions,
-          [name]: value,
-        },
-      });
-    } else {
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-    }
-  };
-  
-
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
-    console.log('Form data submitted:', formData);
-    // Add your form submission logic here
+  const handleSubmit = (values: any, { setSubmitting }: any) => {
+    setTimeout(() => {
+      alert(JSON.stringify(values, null, 2));
+      setSubmitting(false);
+    }, 400);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>
-          Full name:
-          <input
-            type="text"
-            name="fullName"
-            value={formData.fullName}
-            onChange={handleInputChange}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Password:
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleInputChange}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Confirm your password:
-          <input
-            type="password"
-            name="confirmPassword"
-            // This field is not part of the state since it's just for confirmation
-            // Handle its validation on form submission
-            onChange={handleInputChange}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          E-mail address:
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Institution:
-          <select
-            name="institution"
-            value={formData.institution}
-            onChange={handleInputChange}
-          >
-            <option value="Other">Other</option>
-            {/* Add other options here */}
-          </select>
-        </label>
-      </div>
-      <div>
-        <label>
-          <input
-            type="checkbox"
-            name="reviewsMyWork"
-            checked={formData.emailOptions.reviewsMyWork}
-            onChange={handleInputChange}
-          />
-          When someone else reviews my work
-        </label>
-      </div>
-      <div>
-        <label>
-          <input
-            type="checkbox"
-            name="submitsWork"
-            checked={formData.emailOptions.submitsWork}
-            onChange={handleInputChange}
-          />
-          When someone else submits work I am assigned to review
-        </label>
-      </div>
-      <div>
-        <label>
-          <input
-            type="checkbox"
-            name="metaReviewsMyWork"
-            checked={formData.emailOptions.metaReviewsMyWork}
-            onChange={handleInputChange}
-          />
-          When someone else reviews one of my reviews (meta-reviews my work)
-        </label>
-      </div>
-      <div>
-        Action Preference:
-        <label>
-          <input
-            type="radio"
-            name="actionPreference"
-            value="canShowActions"
-            checked={formData.actionPreference === 'canShowActions'}
-            onChange={handleInputChange}
-          />
-          Homepage can show actions
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="actionPreference"
-            value="cannotShowActions"
-            checked={formData.actionPreference === 'cannotShowActions'}
-            onChange={handleInputChange}
-          />
-          Homepage cannot show actions
-        </label>
-      </div>
-      <div>
-        <label>
-          Handle:
-          <input
-            type="text"
-            name="handle"
-            value={formData.handle}
-            onChange={handleInputChange}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Preferred Time Zone:
-          <select name="timeZone" value={formData.timeZone} onChange={handleInputChange}>
-            <option value="Eastern Time">Eastern Time</option>
-            {/* Add other timezone options here */}
-          </select>
-        </label>
-      </div>
-      <div>
-        <label>
-          Preferred Language:
-          <select name="language" value={formData.language} onChange={handleInputChange}>
-            <option value="No Preference">No Preference</option>
-            {/* Add other language options here */}
-          </select>
-        </label>
-      </div>
-      <div>
-        <button type="submit">Save</button>
-      </div>
-    </form>
+    <div className="edit-form-container">
+      <h2>User Profile Information</h2>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting }) => (
+          <Form>
+            <div className="form-field">
+              <label htmlFor="fullName">Full name (last, first[middle]):</label>
+              <Field type="text" name="fullName" />
+              <ErrorMessage name="fullName" component="div" className="error-message" />
+            </div>
+
+            <div className="form-field">
+              <label htmlFor="password">Password:</label>
+              <Field type="password" name="password" />
+              <ErrorMessage name="password" component="div" className="error-message" />
+            </div>
+
+            <div className="form-field">
+              <label htmlFor="confirmPassword">Confirm your password:</label>
+              <Field type="password" name="confirmPassword" />
+              <ErrorMessage name="confirmPassword" component="div" className="error-message" />
+            </div>
+
+            <div className="form-field">
+              <label htmlFor="email">E-mail address:</label>
+              <Field type="email" name="email" />
+              <ErrorMessage name="email" component="div" className="error-message" />
+            </div>
+
+            <div className="form-field">
+              <label htmlFor="institution">Institution:</label>
+              <Field as="select" name="institution">
+                <option value="North Carolina State University">North Carolina State University</option>
+              </Field>
+            </div>
+
+            <div className="form-field action-preference">
+              <label>Action Preference:</label>
+              <div className="radio-group">
+                <label>
+                  <Field type="radio" name="actionPreference" value="canShowActions" />
+                  Homepage can show actions
+                </label>
+                <label>
+                  <Field type="radio" name="actionPreference" value="cannotShowActions" />
+                  Homepage cannot show actions
+                </label>
+              </div>
+              <ErrorMessage name="actionPreference" component="div" className="error-message" />
+            </div>
+
+            <div className="form-field">
+              <label htmlFor="handle">Handle:</label>
+              <Field type="text" name="handle" />
+              <ErrorMessage name="handle" component="div" className="error-message" />
+            </div>
+
+            <div className="form-field">
+              <label htmlFor="timeZone">Preferred Time Zone:</label>
+              <Field as="select" name="timeZone">
+                <option value="GMT-05:00">GMT-05:00 Eastern Time (US)</option>
+              </Field>
+            </div>
+
+            <div className="form-field">
+              <label htmlFor="language">Preferred Language:</label>
+              <Field as="select" name="language">
+                <option value="No Preference">No Preference</option>
+              </Field>
+            </div>
+
+            <div className="form-field">
+              <button type="submit" disabled={isSubmitting}>
+                Save
+              </button>
+            </div>
+          </Form>
+        )}
+      </Formik>
+    </div>
   );
 };
 
