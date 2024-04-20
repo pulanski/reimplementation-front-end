@@ -1,7 +1,8 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import './Edit.css'; // Make sure to import the CSS file
+import './Edit.css'; 
+import { Button } from 'react-bootstrap';
 
 const Edit: React.FC = () => {
   const initialValues = {
@@ -35,7 +36,7 @@ const Edit: React.FC = () => {
 
   return (
     <div className="edit-form-container">
-      <h2>User Profile Information</h2>
+      <h2 className='h2-user-profile'>User Profile Information</h2>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -44,7 +45,7 @@ const Edit: React.FC = () => {
         {({ isSubmitting }) => (
           <Form>
             <div className="form-field">
-              <label htmlFor="fullName">Full name (last, first[middle]):</label>
+              <label htmlFor="fullName" style={{ fontWeight: 800 }}>Full name (last, first[middle]):</label>
               <Field type="text" name="fullName" />
               <ErrorMessage name="fullName" component="div" className="error-message" />
             </div>
@@ -61,14 +62,18 @@ const Edit: React.FC = () => {
               <ErrorMessage name="confirmPassword" component="div" className="error-message" />
             </div>
 
+            <div className='italics'>
+                <p>If password field is blank, the password will not be updated</p>
+            </div>
+
             <div className="form-field">
-              <label htmlFor="email">E-mail address:</label>
+              <label htmlFor="email" style={{ fontWeight: 800 }}>E-mail address:</label>
               <Field type="email" name="email" />
               <ErrorMessage name="email" component="div" className="error-message" />
             </div>
 
             <div className="form-field">
-              <label htmlFor="institution">Institution:</label>
+              <label htmlFor="institution" style={{ fontWeight: 800 }}>Institution:</label>
               <Field as="select" name="institution">
                 <option value="North Carolina State University">North Carolina State University</option>
               </Field>
@@ -110,9 +115,9 @@ const Edit: React.FC = () => {
             </div>
 
             <div className="form-field">
-              <button type="submit" disabled={isSubmitting}>
+              <Button type="submit" disabled={isSubmitting} variant="outline-success">
                 Save
-              </button>
+              </Button>
             </div>
           </Form>
         )}
