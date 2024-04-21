@@ -29,17 +29,19 @@ const ShowReviews: React.FC<ShowReviewsProps> = ({ data }) => {
       
       // Assuming 'reviews' array exists inside the first 'question' of the first 'round'.
       const num_of_reviews = data[r][0].reviews.length;
-      reviewElements.push(<b>Round {r+1}</b>)
+      reviewElements.push(<div className="round-heading">Round {r+1}</div>)
       for (let i = 0; i < num_of_reviews; i++) {
-        reviewElements.push(<b>Review {i+1}</b>)
+        reviewElements.push(<div className="review-heading">Review {i+1}</div>);
         for (let j = 0; j < num_of_questions; j++) {
           reviewElements.push(
-            <div key={`round-${r}-question-${j}-review-${i}`}>
-              <div>{data[r][j].questionText}</div>
-              <div>Score: {data[r][j].reviews[i].score}</div>
-              {data[r][j].reviews[i].comment && (
-                <div>Comment: {data[r][j].reviews[i].comment}</div>
-              )}
+            <div key={`round-${r}-question-${j}-review-${i}`} className="review-block">
+              <div className="question">{j+1}. {data[r][j].questionText}</div>
+              <div className="score-container">
+                <span className="score">{data[r][j].reviews[i].score}</span>
+                {data[r][j].reviews[i].comment && (
+                  <div className="comment">{data[r][j].reviews[i].comment}</div>
+                )}
+              </div>
             </div>
           );
         }

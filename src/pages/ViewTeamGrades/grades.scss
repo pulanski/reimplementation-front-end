@@ -223,3 +223,68 @@
     margin: auto;
   }
 }
+
+.round-heading {
+  font-weight: bold;
+  margin-top: 20px;
+  font-size: 30px;
+}
+
+.review-heading {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.review-block {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 0;
+}
+
+.question {
+  font-weight: bold;
+}
+
+.score {
+  background-color: #4caf50;
+  border-radius: 50%; /* Makes it circular */
+  width: 24px; 
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black; /* Text color */
+  margin-right: 10px; /* Space between score and comment */
+  font-weight: bold; /* Make the score text bold */
+
+}
+
+.comment {
+  flex-grow: 1; /* Ensures comment fills the rest of the container */
+  padding-top: 3px; 
+}
+
+/* Style for even-numbered review blocks */
+.review-block:nth-child(even) {
+  background-color: #d9edf7; 
+  
+}
+
+/* Style for odd-numbered review blocks */
+.review-block:nth-child(odd) {
+  background-color: #fcf8e3; 
+
+}
+
+.score-container {
+  display: flex;
+  align-items: center; 
+  margin-top: 5px;
+  padding-top: 10px; 
+
+}
+
+
+.review-container {
+  margin-bottom: 200px; 
+}
