@@ -197,22 +197,33 @@ const ReviewTable: React.FC = () => {
         Comment: {dummyData.comment}<br></br>
         Late Penalty: {dummyData.late_penalty}<br></br>
       </p>
-      <div style={{ display: 'flex' }}>
-        <div>
+      <div style={{ display: 'flex', flexDirection: 'row' }}>
+        <div style={{ marginRight: '20px' }}>
           <button onClick={toggleShowReviews}>
             {showReviews ? 'Hide Reviews' : 'Show Reviews'}
           </button>
-          {showReviews && <ShowReviews data={dummyDataRounds} />}
         </div>
-
         <div>
           <button onClick={toggleAuthorFeedback}>
-          {ShowAuthorFeedback ? 'Hide Author Feedback' : 'Show Author Feedback'}
+            {ShowAuthorFeedback ? 'Hide Author Feedback' : 'Show Author Feedback'}
           </button>
-          {ShowAuthorFeedback && <ShowReviews data={dummyauthorfeedback} />}
         </div>
       </div>
-    
+      <div>
+        {showReviews && (
+          <div>
+            <h2>Reviews</h2>
+            <ShowReviews data={dummyDataRounds} />
+          </div>
+        )}
+        {ShowAuthorFeedback && (
+          <div>
+            <h2>Author Feedback</h2>
+            <ShowReviews data={dummyDataRounds} />
+          </div>
+        )}
+      </div>
+
       <Link to="/">Back</Link>
     </div>
   );
