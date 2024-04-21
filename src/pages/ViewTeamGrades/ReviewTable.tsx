@@ -6,6 +6,11 @@ import dummyData from './Data/dummyData.json'; // Importing dummy data
 import { calculateAverages, getColorClass } from './utils'; // Importing utility functions
 import './grades.scss'; // Importing styles
 import { Link } from 'react-router-dom'; // Importing Link from react-router-dom
+import ShowSubmission from './ShowSubmission'; //importing show submission component
+import { Button, Collapse } from 'react-bootstrap';
+import ShowReviews from './ShowReviews'; //importing show reviews component
+
+import temp from './Data/heatMapData.json';
 
 // Functional component ReviewTable
 const ReviewTable: React.FC = () => {
@@ -13,6 +18,8 @@ const ReviewTable: React.FC = () => {
   const [sortOrderRow, setSortOrderRow] = useState<'asc' | 'desc' | 'none'>('none'); // State for row sort order
   const [showWordCount10, setShowWordCount10] = useState(false); // State for showing reviews with more than 10 words
   const [showWordCount20, setShowWordCount20] = useState(false); // State for showing reviews with more than 20 words
+  const [open, setOpen] = useState(false); 
+  const [showReviews, setShowReviews] = useState(false);
 
   // Function to toggle the sort order for rows
   const toggleSortOrderRow = () => {
@@ -37,15 +44,80 @@ const ReviewTable: React.FC = () => {
     setShowWordCount20(false);
   };
 
+  //function for show reviews
+    //const [isVisible, setIsVisible] = useState<boolean>(false);
+    // const toggleVisibility = () => {
+    //     setIsVisible(!isVisible);
+    // };
+
+    // Function to toggle the visibility of ShowReviews component
+  const toggleShowReviews = () => {
+    setShowReviews(!showReviews);
+  };
+
+    // const renderQuestionReviews = () => {
+    //   return dummyDataRounds[currentRound].map((question, index) => (
+    //     <div key={index}>
+    //       <h3>Question {question.questionNumber}: {question.questionText}</h3>
+    //       {question.reviews.map((review, reviewIndex) => (
+    //         <div key={reviewIndex}>
+    //           <p>Review {reviewIndex + 1}: Score: {review.score}</p>
+    //           {('comment' in review) && <p>Comment: {review.comment}</p>}
+    //         </div>
+    //       ))}
+    //     </div>
+    //   ));
+    // };
+
   // JSX rendering of the ReviewTable component
   return (
+    
     <div className="p-4">
-      <h2 className="text-2xl font-bold mb-2">Summary Report for assignment: Program 2</h2>
+      <h2 className="text-2xl font-bold mb-2">Summary Report: Program 2</h2>
       <h5 className="text-xl font-semibold mb-1">Team: {dummyData.team}</h5>
       <h5 className="mb-4">
         Average peer review score:{" "}
-        <span className={getColorClass(parseFloat(averagePeerReviewScore), 100)}>{averagePeerReviewScore}</span>
+        <span>{averagePeerReviewScore}</span>
       </h5>
+      <div>Tagging: 97/97</div>
+      <div>
+        <Button
+            onClick={() => setOpen(!open)}
+            aria-controls="example-collapse-text"
+            aria-expanded={open}
+          >
+          Show Submission
+        </Button>
+
+      {/* Collapsible content */}
+      <Collapse in={open}>
+        <div id="example-collapse-text">
+          <br></br>
+
+          {/* Render links only when open is true */}
+          {open && (
+            <>
+              <a
+                href="https://github.ncsu.edu/Program-2-Ruby-on-Rails/WolfEvents"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                https://github.ncsu.edu/Program-2-Ruby-on-Rails/WolfEvents
+              </a>
+              <br />
+              <a
+                href="http://152.7.177.44:8080/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                http://152.7.177.44:8080/
+              </a>
+            </>
+          )}
+        </div>
+      </Collapse>
+      </div>
+
       <h4 className="text-xl font-semibold mb-1">Review (Round: {currentRound + 1} of {dummyDataRounds.length}) </h4>
       <br></br>
       <form>
@@ -112,6 +184,16 @@ const ReviewTable: React.FC = () => {
         Comment: {dummyData.comment}<br></br>
         Late Penalty: {dummyData.late_penalty}<br></br>
       </p>
+      <div>
+        <button onClick={toggleShowReviews}>Show Reviews</button>
+        {/* {isVisible && renderQuestionReviews()} */}
+        {/* <h1>Review Table</h1> */}
+        {showReviews && <ShowReviews data={dummyDataRounds} />}
+        {/* <ReviewTable data={dummyData} /> */}
+      </div>
+      
+      
+
       <Link to="/">Back</Link>
     </div>
   );
