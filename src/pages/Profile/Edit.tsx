@@ -15,6 +15,11 @@ const Edit: React.FC = () => {
     handle: '',
     timeZone: 'GMT-05:00',
     language: 'No Preference',
+    emailOptions: {
+      reviewNotification: false,
+      submissionNotification: false,
+      metaReviewNotification: false,
+    },
   };
 
   const validationSchema = Yup.object().shape({
@@ -107,6 +112,30 @@ const Edit: React.FC = () => {
               <Field type="text" name="handle" />
               <ErrorMessage name="handle" component="div" className="error-message" />
             </div>
+
+           
+
+            <div className="email-options-container">
+              <div className="email-options-header">
+                <label className="email-options-heading">Email Options:</label>
+                <p className="email-instructions">Check the boxes representing the times when you want to receive e-mail.</p>
+              </div>
+              <div className="checkbox-group">
+                <label>
+                  <Field type="checkbox" name="emailOptions.reviewNotification" />
+                  When someone else reviews my work
+                </label>
+                <label>
+                  <Field type="checkbox" name="emailOptions.submissionNotification" />
+                  When someone else submits work I am assigned to review
+                </label>
+                <label>
+                  <Field type="checkbox" name="emailOptions.metaReviewNotification" />
+                  When someone else reviews one of my reviews (meta-reviews my work)
+                </label>
+              </div>
+            </div>
+
 
             <div className="form-field">
               <label htmlFor="timeZone">Preferred Time Zone:</label>

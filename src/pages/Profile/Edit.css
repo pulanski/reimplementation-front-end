@@ -50,6 +50,55 @@
     margin-bottom: 40px;
   }
 
+
+.email-options-container {
+  position: relative;
+  padding-right: 20px; 
+  margin-bottom: 20px;
+}
+
+
+.email-options-container .email-options-header {
+  display: block;
+  margin-bottom: 0; 
+}
+
+.email-options-container .email-options-heading {
+  font-weight: bold;
+  display: block; 
+}
+
+
+.email-options-container .email-instructions {
+  display: block; 
+  text-align: left; 
+  margin-top: 5px; 
+  margin-bottom: 10px;
+  
+}
+
+/* Ensure checkboxes are stacked vertically below the instruction */
+.email-options-container .checkbox-group {
+  display: block;
+  padding-top: 20px; /* This should be at least as high as your .email-instructions text to avoid overlap */
+}
+
+/* Styling for individual checkbox labels */
+.email-options-container .checkbox-group label {
+  display: block; /* Each label with its checkbox will be on a new line */
+  margin-bottom: 5px; /* Adjust space between each option */
+}
+
+/* Styling for checkbox inputs */
+.email-options-container .checkbox-group label input[type="checkbox"] {
+  margin-right: 10px; /* Space between the checkbox and the label text */
+}
+
+/* Rest of your CSS... */
+
+
+
+
   .italics > p {
     font-style: italic;
     font-size: 11px;
