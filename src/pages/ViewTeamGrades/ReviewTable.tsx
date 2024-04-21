@@ -6,13 +6,21 @@ import dummyData from './Data/dummyData.json'; // Importing dummy data
 import { calculateAverages, getColorClass } from './utils'; // Importing utility functions
 import './grades.scss'; // Importing styles
 import { Link } from 'react-router-dom'; // Importing Link from react-router-dom
-
+import CircularProgress  from './CircularProgress';
+import Statistics from './Statistics';
 // Functional component ReviewTable
 const ReviewTable: React.FC = () => {
   const [currentRound, setCurrentRound] = useState<number>(0); // State for current round
   const [sortOrderRow, setSortOrderRow] = useState<'asc' | 'desc' | 'none'>('none'); // State for row sort order
   const [showWordCount10, setShowWordCount10] = useState(false); // State for showing reviews with more than 10 words
   const [showWordCount20, setShowWordCount20] = useState(false); // State for showing reviews with more than 20 words
+
+
+  //function for show submission
+  const [statisticsVisible, setstatisticsVisible] = useState<boolean>(false);
+  const toggleStatisticsVisibility = () => {
+      setstatisticsVisible(!statisticsVisible);
+  };
 
   // Function to toggle the sort order for rows
   const toggleSortOrderRow = () => {
@@ -106,6 +114,23 @@ const ReviewTable: React.FC = () => {
         <br></br>
         <RoundSelector currentRound={currentRound} handleRoundChange={handleRoundChange} />
       </div>
+
+      <div>
+      <a href="#" onClick={toggleStatisticsVisibility}>
+        {statisticsVisible ? 'hide stats' : 'show stats'}
+      </a>
+      {statisticsVisible && (
+        <div className="container">
+          <div> <b>Stats</b></div>
+          <div><b>Element 2</b></div>
+          <div><b>Not shown</b></div>
+          <div><CircularProgress size={70} progress={75} strokeWidth={10} /></div>
+        </div>
+      )}
+      </div>
+
+      <Statistics/>
+    
       <p className="mt-4">
         <h3>Grade and comment for submission</h3>
         Grade: {dummyData.grade}<br></br>
