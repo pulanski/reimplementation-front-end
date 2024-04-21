@@ -219,7 +219,7 @@ const ReviewTable: React.FC = () => {
         {ShowAuthorFeedback && (
           <div>
             <h2>Author Feedback</h2>
-            <ShowReviews data={dummyDataRounds} />
+            <ShowReviews data={dummyauthorfeedback} />
           </div>
         )}
       </div>
