@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ReviewTableRow from './ReviewTableRow'; // Importing the ReviewTableRow component
 import RoundSelector from './RoundSelector'; // Importing the RoundSelector component
 import dummyDataRounds from './Data/heatMapData.json'; // Importing dummy data for rounds
+import dummyauthorfeedback from './Data/authorFeedback.json'; // Importing dummy data for author feedback
 import dummyData from './Data/dummyData.json'; // Importing dummy data
 import { calculateAverages, getColorClass } from './utils'; // Importing utility functions
 import './grades.scss'; // Importing styles
@@ -21,6 +22,7 @@ const ReviewTable: React.FC = () => {
   const [showToggleQuestion, setShowToggleQuestion] = useState(false); // State for showing question column
   const [open, setOpen] = useState(false); 
   const [showReviews, setShowReviews] = useState(false);
+  const [ShowAuthorFeedback, setShowAuthorFeedback] = useState(false);
 
   // Function to toggle the sort order for rows
   const toggleSortOrderRow = () => {
@@ -56,9 +58,16 @@ const ReviewTable: React.FC = () => {
     setShowReviews(!showReviews);
   };
 
+
+    // Function to toggle the visibility of ShowAuthorFeedback component
+    const toggleAuthorFeedback = () => {
+      setShowAuthorFeedback(!ShowAuthorFeedback);
+    };
+
   const toggleShowQuestion = () => {
     setShowToggleQuestion(!showToggleQuestion);
   };
+
 
   // JSX rendering of the ReviewTable component
   return (
@@ -77,7 +86,7 @@ const ReviewTable: React.FC = () => {
             aria-controls="example-collapse-text"
             aria-expanded={open}
           >
-          Show Submission
+          {open ? 'Hide Submission' : 'Show Submission'}
         </Button>
 
       {/* Collapsible content */}
@@ -188,16 +197,22 @@ const ReviewTable: React.FC = () => {
         Comment: {dummyData.comment}<br></br>
         Late Penalty: {dummyData.late_penalty}<br></br>
       </p>
-      <div>
-        <button onClick={toggleShowReviews}>Show Reviews</button>
-        {/* {isVisible && renderQuestionReviews()} */}
-        {/* <h1>Review Table</h1> */}
-        {showReviews && <ShowReviews data={dummyDataRounds} />}
-        {/* <ReviewTable data={dummyData} /> */}
-      </div>
-      
-      
+      <div style={{ display: 'flex' }}>
+        <div>
+          <button onClick={toggleShowReviews}>
+            {showReviews ? 'Hide Reviews' : 'Show Reviews'}
+          </button>
+          {showReviews && <ShowReviews data={dummyDataRounds} />}
+        </div>
 
+        <div>
+          <button onClick={toggleAuthorFeedback}>
+          {ShowAuthorFeedback ? 'Hide Author Feedback' : 'Show Author Feedback'}
+          </button>
+          {ShowAuthorFeedback && <ShowReviews data={dummyauthorfeedback} />}
+        </div>
+      </div>
+    
       <Link to="/">Back</Link>
     </div>
   );
