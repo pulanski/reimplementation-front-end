@@ -16,9 +16,9 @@ const Edit: React.FC = () => {
     timeZone: 'GMT-05:00',
     language: 'No Preference',
     emailOptions: {
-      reviewNotification: false,
-      submissionNotification: false,
-      metaReviewNotification: false,
+      reviewNotification: true,
+      submissionNotification: true,
+      metaReviewNotification: true,
     },
   };
 
