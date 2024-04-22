@@ -11,14 +11,12 @@ import ShowSubmission from './ShowSubmission'; //importing show submission compo
 import { Button, Collapse } from 'react-bootstrap';
 import ShowReviews from './ShowReviews'; //importing show reviews component
 
-
-
 // Functional component ReviewTable
 const ReviewTable: React.FC = () => {
   const [currentRound, setCurrentRound] = useState<number>(0); // State for current round
   const [sortOrderRow, setSortOrderRow] = useState<'asc' | 'desc' | 'none'>('none'); // State for row sort order
-  const [showWordCount10, setShowWordCount10] = useState(false); // State for showing reviews with more than 10 words
-  const [showWordCount20, setShowWordCount20] = useState(false); // State for showing reviews with more than 20 words
+  // const [showWordCount10, setShowWordCount10] = useState(false); // State for showing reviews with more than 10 words
+  // const [showWordCount20, setShowWordCount20] = useState(false); // State for showing reviews with more than 20 words
   const [showToggleQuestion, setShowToggleQuestion] = useState(false); // State for showing question column
   const [open, setOpen] = useState(false); 
   const [showReviews, setShowReviews] = useState(false);
@@ -43,21 +41,14 @@ const ReviewTable: React.FC = () => {
   // Function to handle round change
   const handleRoundChange = (roundIndex: number) => {
     setCurrentRound(roundIndex);
-    setShowWordCount10(false);
-    setShowWordCount20(false);
+    // setShowWordCount10(false);
+    // setShowWordCount20(false);
   };
-
-  //function for show reviews
-    //const [isVisible, setIsVisible] = useState<boolean>(false);
-    // const toggleVisibility = () => {
-    //     setIsVisible(!isVisible);
-    // };
 
     // Function to toggle the visibility of ShowReviews component
   const toggleShowReviews = () => {
     setShowReviews(!showReviews);
   };
-
 
     // Function to toggle the visibility of ShowAuthorFeedback component
     const toggleAuthorFeedback = () => {
@@ -71,7 +62,6 @@ const ReviewTable: React.FC = () => {
 
   // JSX rendering of the ReviewTable component
   return (
-    
     <div className="p-4">
       <h2 className="text-2xl font-bold mb-2">Summary Report: Program 2</h2>
       <h5 className="text-xl font-semibold mb-1">Team: {dummyData.team}</h5>
@@ -81,14 +71,9 @@ const ReviewTable: React.FC = () => {
       </h5>
       <div>Tagging: 97/97</div>
       <div>
-        <Button
-            onClick={() => setOpen(!open)}
-            aria-controls="example-collapse-text"
-            aria-expanded={open}
-          >
+      <a href="#" onClick={(e) => { e.preventDefault(); setOpen(!open); }}>
           {open ? 'Hide Submission' : 'Show Submission'}
-        </Button>
-
+      </a>
       {/* Collapsible content */}
       <Collapse in={open}>
         <div id="example-collapse-text">
@@ -97,22 +82,32 @@ const ReviewTable: React.FC = () => {
           {/* Render links only when open is true */}
           {open && (
             <>
-              <a
-                href="https://github.ncsu.edu/Program-2-Ruby-on-Rails/WolfEvents"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                https://github.ncsu.edu/Program-2-Ruby-on-Rails/WolfEvents
-              </a>
-              <br />
-              <a
-                href="http://152.7.177.44:8080/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                http://152.7.177.44:8080/
-              </a>
-            </>
+            <a
+              href="https://github.ncsu.edu/Program-2-Ruby-on-Rails/WolfEvents"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              https://github.ncsu.edu/Program-2-Ruby-on-Rails/WolfEvents
+            </a>
+            <br />
+            <a
+              href="http://152.7.177.44:8080/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              http://152.7.177.44:8080/
+            </a>
+            <br />
+            {/* Add a downloadable link to your dummy file */}
+            <a
+              href="https://github.ncsu.edu/Program-2-Ruby-on-Rails/WolfEvents/raw/main/README.md"
+              download="README.md"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              README.md
+            </a>
+          </>
           )}
         </div>
       </Collapse>
@@ -121,22 +116,22 @@ const ReviewTable: React.FC = () => {
       <h4 className="text-xl font-semibold mb-1">Review (Round: {currentRound + 1} of {dummyDataRounds.length}) </h4>
       <br></br>
       <form>
-        <input
+        {/* <input
           type="checkbox"
           id="wordCount10"
           name="wordCount10"
           checked={showWordCount10}
           onChange={(e) => setShowWordCount10(e.target.checked)}
         />
-        <label htmlFor="wordCount10"> &nbsp; More than 10 words &nbsp;</label>
-        <input
+        <label htmlFor="wordCount10"> &nbsp; More than 10 words &nbsp;</label> */}
+        {/* <input
           type="checkbox"
           id="wordCount20"
           name="wordCount20"
           checked={showWordCount20}
           onChange={(e) => setShowWordCount20(e.target.checked)}
         />
-        <label htmlFor="wordCount20"> &nbsp;More than 20 words</label>
+        <label htmlFor="wordCount20"> &nbsp;More than 20 words</label> */}
         <input
           type="checkbox"
           id="toggleQuestion"
@@ -163,8 +158,8 @@ const ReviewTable: React.FC = () => {
               {sortOrderRow === "asc" && <span> ▲</span>}
               {sortOrderRow === "desc" && <span> ▼</span>}
             </th>
-            {showWordCount10 && <th className="py-2 px-4 text-center" style={{ width: '70px' }}>10+ Words</th>}
-            {showWordCount20 && <th className="py-2 px-4 text-center" style={{ width: '70px' }}>20+ Words</th>}
+            {/* {showWordCount10 && <th className="py-2 px-4 text-center" style={{ width: '70px' }}>10+ Words</th>}
+            {showWordCount20 && <th className="py-2 px-4 text-center" style={{ width: '70px' }}>20+ Words</th>} */}
           </tr>
           </thead>
           <tbody>
@@ -172,8 +167,8 @@ const ReviewTable: React.FC = () => {
             <ReviewTableRow
               key={index}
               row={row}
-              showWordCount10={showWordCount10}
-              showWordCount20={showWordCount20}
+              // showWordCount10={showWordCount10}
+              // showWordCount20={showWordCount20}
               showToggleQuestion={showToggleQuestion}
             />
           ))}
@@ -199,14 +194,14 @@ const ReviewTable: React.FC = () => {
       </p>
       <div style={{ display: 'flex', flexDirection: 'row' }}>
         <div style={{ marginRight: '20px' }}>
-          <button onClick={toggleShowReviews}>
+        <a href="#" onClick={(e) => { e.preventDefault(); toggleShowReviews(); }}>
             {showReviews ? 'Hide Reviews' : 'Show Reviews'}
-          </button>
+            </a>
         </div>
         <div>
-          <button onClick={toggleAuthorFeedback}>
+        <a href="#" onClick={(e) => { e.preventDefault(); toggleAuthorFeedback(); }}>
             {ShowAuthorFeedback ? 'Hide Author Feedback' : 'Show Author Feedback'}
-          </button>
+        </a>
         </div>
       </div>
       <div>
