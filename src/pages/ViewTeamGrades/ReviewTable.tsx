@@ -11,7 +11,7 @@ import ShowSubmission from './ShowSubmission'; //importing show submission compo
 import { Button, Collapse } from 'react-bootstrap';
 import ShowReviews from './ShowReviews'; //importing show reviews component
 
-import temp from './Data/heatMapData.json';
+
 
 // Functional component ReviewTable
 const ReviewTable: React.FC = () => {
