@@ -167,13 +167,10 @@ const Edit: React.FC = () => {
               <label htmlFor="language">Preferred Language:</label>
               <Field as="select" name="language">
                 <option value="No Preference">No Preference</option>
+                <option value="English">English</option>
+                <option value="Hindi">Hindi</option>
               </Field>
-              <Field as="select" name="language">
-                <option value="No Preference">English</option>
-              </Field>
-              <Field as="select" name="language">
-                <option value="No Preference">Hindi</option>
-              </Field>
+              
             </div>
 
             {/* Submit button */}
