@@ -56,7 +56,7 @@ const ReviewTable: React.FC = () => {
       <div>
       <a href="#" onClick={(e) => { e.preventDefault(); setOpen(!open); }}>
           {open ? 'Hide Submission' : 'Show Submission'}
-      </a><span>(E2425)</span>
+      </a>
       {/* Collapsible content */}
       <Collapse in={open}>
         <div id="example-collapse-text">

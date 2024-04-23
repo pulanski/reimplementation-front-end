@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getColorClass } from './utils'; // Importing utility functions
 import { ReviewData } from './App'; // Importing the ReviewData interface from App
 

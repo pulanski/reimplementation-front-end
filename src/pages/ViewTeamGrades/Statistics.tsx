@@ -6,6 +6,7 @@ import ShowReviews from './ShowReviews'; //importing show reviews component
 import dummyDataRounds from './Data/heatMapData.json'; // Importing dummy data for rounds
 import dummyauthorfeedback from './Data/authorFeedback.json'; // Importing dummy data for author feedback
 
+
 interface StatisticsProps {
   // Define any props here if needed
   average:string;
@@ -36,6 +37,25 @@ const Statistics: React.FC<StatisticsProps> = ({average}) => {
     textAlign: 'center',
     
   };
+
+  let totalReviewsForQuestion1: number = 0;
+  dummyDataRounds.forEach(round => {
+    round.forEach(question => {
+      if (question.questionNumber === "1") {
+        totalReviewsForQuestion1 += question.reviews.length;
+      }
+    });
+  });
+
+  let totalfeedbackForQuestion1: number = 0;
+  dummyauthorfeedback.forEach(round => {
+    round.forEach(question => {
+      if (question.questionNumber === "1") {
+        totalfeedbackForQuestion1 += question.reviews.length;
+      }
+    });
+  });
+
 
   const subHeaderCellStyle: React.CSSProperties = {
     padding: '10px',
@@ -88,7 +108,7 @@ const Statistics: React.FC<StatisticsProps> = ({average}) => {
                 <div>{average}</div>
                 <a href="#" onClick={(e) => { e.preventDefault(); toggleShowReviews(); }}>
                     {showReviews ? 'Hide Reviews' : 'Show Reviews'}
-                </a><span>(10)</span>
+                </a><span>({totalReviewsForQuestion1})</span>
               </div>
             </td>
             <td style={subHeaderCellStyle}>
@@ -101,7 +121,7 @@ const Statistics: React.FC<StatisticsProps> = ({average}) => {
                 <div>96.67%</div>
                 <a href="#" onClick={(e) => { e.preventDefault(); toggleAuthorFeedback(); }}>
                     {ShowAuthorFeedback ? 'Hide Author Feedback' : 'Show Author Feedback'}
-                </a><span>(6)</span>
+                </a><span>({totalfeedbackForQuestion1})</span>
               </div>
               <div>
       </div>
