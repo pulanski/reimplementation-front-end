@@ -90,4 +90,3 @@ export const participantColumns = (handleEdit: Fn, handleDelete: Fn) => [
     ),
   }),
 ];
-
