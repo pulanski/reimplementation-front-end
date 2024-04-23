@@ -9,7 +9,7 @@ import { IParticipantResponse as IParticipant } from "../../utils/interfaces";
 
 type Fn = (row: Row<IParticipant>) => void;
 const columnHelper = createColumnHelper<IParticipant>();
-const tooltip = <Tooltip id="tooltip">Delete Participant</Tooltip>;
+const deletetooltip = <Tooltip id="delete-tooltip">Delete Participant</Tooltip>;
 export const participantColumns = (handleEdit: Fn, handleDelete: Fn) => [
   columnHelper.accessor("id", {
     header: "Id",
@@ -20,16 +20,19 @@ export const participantColumns = (handleEdit: Fn, handleDelete: Fn) => [
   columnHelper.accessor("user.name", {
     header: "Participant Name",
     enableSorting: true,
+    enableColumnFilter: false,
   }),
 
   columnHelper.accessor("user.full_name", {
     header: "Full Name",
     enableSorting: true,
     enableMultiSort: true,
+    enableColumnFilter: false,
   }),
 
   columnHelper.accessor("user.email", {
     header: "Email",
+    enableColumnFilter: false,
   }),
 
   columnHelper.accessor("user.role.name", {
@@ -44,30 +47,25 @@ export const participantColumns = (handleEdit: Fn, handleDelete: Fn) => [
     enableColumnFilter: false,
   }),
 
-  columnHelper.group({
-    id: "email_preferences",
-    header: "Email Preferences",
-    columns: [
-      columnHelper.accessor("user.email_on_review", {
-        header: "Review",
-        enableSorting: false,
-        enableColumnFilter: false,
-        enableGlobalFilter: false,
-      }),
-      columnHelper.accessor("user.email_on_submission", {
-        header: "Submission",
-        enableSorting: false,
-        enableColumnFilter: false,
-        enableGlobalFilter: false,
-      }),
-      columnHelper.accessor("user.email_on_review_of_review", {
-        header: "Meta Review",
-        enableSorting: false,
-        enableColumnFilter: false,
-        enableGlobalFilter: false,
-      }),
-    ],
+  columnHelper.accessor("user.email_on_review", {
+    header: "Review",
+    enableSorting: false,
+    enableColumnFilter: false,
+    enableGlobalFilter: false,
   }),
+  columnHelper.accessor("user.email_on_submission", {
+    header: "Submission",
+    enableSorting: false,
+    enableColumnFilter: false,
+    enableGlobalFilter: false,
+  }),
+  columnHelper.accessor("user.email_on_review_of_review", {
+    header: "Meta Review",
+    enableSorting: false,
+    enableColumnFilter: false,
+    enableGlobalFilter: false,
+  }),
+
   columnHelper.accessor("user.institution.name", {
     id: "institution",
     header: "Institution",
@@ -78,7 +76,7 @@ export const participantColumns = (handleEdit: Fn, handleDelete: Fn) => [
     header: "Actions",
     cell: ({ row }) => (
       <>
-        <OverlayTrigger overlay={tooltip} placement="bottom">
+        <OverlayTrigger overlay={deletetooltip} placement="bottom">
           <Button
             variant="outline-danger"
             size="sm"
@@ -92,3 +90,4 @@ export const participantColumns = (handleEdit: Fn, handleDelete: Fn) => [
     ),
   }),
 ];
+
