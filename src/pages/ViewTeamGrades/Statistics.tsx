@@ -2,6 +2,9 @@
 import React,{useState} from 'react';
 import './grades.scss';
 import CircularProgress  from './CircularProgress';
+import ShowReviews from './ShowReviews'; //importing show reviews component
+import dummyDataRounds from './Data/heatMapData.json'; // Importing dummy data for rounds
+import dummyauthorfeedback from './Data/authorFeedback.json'; // Importing dummy data for author feedback
 
 interface StatisticsProps {
   // Define any props here if needed
@@ -15,6 +18,18 @@ const Statistics: React.FC<StatisticsProps> = ({average}) => {
   const toggleStatisticsVisibility = () => {
       setstatisticsVisible(!statisticsVisible);
   };
+  const [showReviews, setShowReviews] = useState(false);
+  const [ShowAuthorFeedback, setShowAuthorFeedback] = useState(false);
+
+  // Function to toggle the visibility of ShowReviews component
+  const toggleShowReviews = () => {
+    setShowReviews(!showReviews);
+  };
+
+    // Function to toggle the visibility of ShowAuthorFeedback component
+    const toggleAuthorFeedback = () => {
+      setShowAuthorFeedback(!ShowAuthorFeedback);
+    };
 
   const headerCellStyle: React.CSSProperties = {
     padding: '10px',
@@ -28,7 +43,7 @@ const Statistics: React.FC<StatisticsProps> = ({average}) => {
   };
 
   return (
-    
+    <div>
     <table style={{ width: '90%', borderCollapse: 'collapse' }}>
       <thead>
       <a href="#" onClick={toggleStatisticsVisibility}>
@@ -65,13 +80,15 @@ const Statistics: React.FC<StatisticsProps> = ({average}) => {
               <div style={{textAlign: 'center' }}>
                 <a href="#">ssshah26 </a><span>(Siddharth Shah)</span>
                 <br />
-                <a href="#">show submission </a><span>(E2425)</span>
+                {/* <a href="#">show submission </a><span>(E2425)</span> */}
               </div>
             </td>
             <td style={subHeaderCellStyle}>
               <div style={{textAlign: 'center' }}>
                 <div>{average}</div>
-                <a href="#">show reviews </a><span>(11)</span>
+                <a href="#" onClick={(e) => { e.preventDefault(); toggleShowReviews(); }}>
+                    {showReviews ? 'Hide Reviews' : 'Show Reviews'}
+                </a><span>(10)</span>
               </div>
             </td>
             <td style={subHeaderCellStyle}>
@@ -82,8 +99,12 @@ const Statistics: React.FC<StatisticsProps> = ({average}) => {
             <td style={subHeaderCellStyle}>
               <div style={{textAlign: 'center' }}>
                 <div>96.67%</div>
-                <a href="#">show author feedback </a><span>(6)</span>
+                <a href="#" onClick={(e) => { e.preventDefault(); toggleAuthorFeedback(); }}>
+                    {ShowAuthorFeedback ? 'Hide Author Feedback' : 'Show Author Feedback'}
+                </a><span>(6)</span>
               </div>
+              <div>
+      </div>
             </td>
             <td style={subHeaderCellStyle}>
               <div style={{textAlign: 'center' }}>
@@ -109,9 +130,23 @@ const Statistics: React.FC<StatisticsProps> = ({average}) => {
           </tr>
       </thead>
       <tbody>
-      
       </tbody>
     </table>
+    <div>
+        {showReviews && (
+          <div>
+            <h2>Reviews</h2>
+            <ShowReviews data={dummyDataRounds} />
+          </div>
+        )}
+        {ShowAuthorFeedback && (
+          <div>
+            <h2>Author Feedback</h2>
+            <ShowReviews data={dummyauthorfeedback} />
+          </div>
+        )}
+      </div>
+   </div> 
   );
   
 };

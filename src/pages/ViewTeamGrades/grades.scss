@@ -264,13 +264,6 @@
   font-weight: bold;
 }
 
-.c1 { background-color: #ff0000; } /* Example color for c1 */
-.c2 { background-color: #ff8000; } /* Example color for c2 */
-.c3 { background-color: #ffff00; } /* Example color for c3 */
-.c4 { background-color: #80ff00; } /* Example color for c4 */
-.c5 { background-color: #00ff00; } /* Example color for c5 */
-.cf { background-color: #0000ff; } /* Fallback color for cf */
-
 .comment {
   flex-grow: 1; /* Ensures comment fills the rest of the container */
   padding-top: 3px; 

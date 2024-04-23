@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import ReviewTableRow from './ReviewTableRow'; // Importing the ReviewTableRow component
 import RoundSelector from './RoundSelector'; // Importing the RoundSelector component
 import dummyDataRounds from './Data/heatMapData.json'; // Importing dummy data for rounds
-import dummyauthorfeedback from './Data/authorFeedback.json'; // Importing dummy data for author feedback
 import dummyData from './Data/dummyData.json'; // Importing dummy data
 import { calculateAverages, getColorClass } from './utils'; // Importing utility functions
 import './grades.scss'; // Importing styles
@@ -10,7 +9,6 @@ import { Link } from 'react-router-dom'; // Importing Link from react-router-dom
 import Statistics from './Statistics';
 import ShowSubmission from './ShowSubmission'; //importing show submission component
 import { Button, Collapse } from 'react-bootstrap';
-import ShowReviews from './ShowReviews'; //importing show reviews component
 
 // Functional component ReviewTable
 const ReviewTable: React.FC = () => {
@@ -18,8 +16,6 @@ const ReviewTable: React.FC = () => {
   const [sortOrderRow, setSortOrderRow] = useState<'asc' | 'desc' | 'none'>('none'); // State for row sort order
   const [showToggleQuestion, setShowToggleQuestion] = useState(false); // State for showing question column
   const [open, setOpen] = useState(false); 
-  const [showReviews, setShowReviews] = useState(false);
-  const [ShowAuthorFeedback, setShowAuthorFeedback] = useState(false);
 
   // Function to toggle the sort order for rows
   const toggleSortOrderRow = () => {
@@ -42,16 +38,6 @@ const ReviewTable: React.FC = () => {
     setCurrentRound(roundIndex);
   };
 
-    // Function to toggle the visibility of ShowReviews component
-  const toggleShowReviews = () => {
-    setShowReviews(!showReviews);
-  };
-
-    // Function to toggle the visibility of ShowAuthorFeedback component
-    const toggleAuthorFeedback = () => {
-      setShowAuthorFeedback(!ShowAuthorFeedback);
-    };
-
   const toggleShowQuestion = () => {
     setShowToggleQuestion(!showToggleQuestion);
   };
@@ -70,7 +56,7 @@ const ReviewTable: React.FC = () => {
       <div>
       <a href="#" onClick={(e) => { e.preventDefault(); setOpen(!open); }}>
           {open ? 'Hide Submission' : 'Show Submission'}
-      </a>
+      </a><span>(E2425)</span>
       {/* Collapsible content */}
       <Collapse in={open}>
         <div id="example-collapse-text">
@@ -173,32 +159,6 @@ const ReviewTable: React.FC = () => {
         Comment: {dummyData.comment}<br></br>
         Late Penalty: {dummyData.late_penalty}<br></br>
       </p>
-      <div style={{ display: 'flex', flexDirection: 'row' }}>
-        <div style={{ marginRight: '20px' }}>
-        <a href="#" onClick={(e) => { e.preventDefault(); toggleShowReviews(); }}>
-            {showReviews ? 'Hide Reviews' : 'Show Reviews'}
-            </a>
-        </div>
-        <div>
-        <a href="#" onClick={(e) => { e.preventDefault(); toggleAuthorFeedback(); }}>
-            {ShowAuthorFeedback ? 'Hide Author Feedback' : 'Show Author Feedback'}
-        </a>
-        </div>
-      </div>
-      <div>
-        {showReviews && (
-          <div>
-            <h2>Reviews</h2>
-            <ShowReviews data={dummyDataRounds} />
-          </div>
-        )}
-        {ShowAuthorFeedback && (
-          <div>
-            <h2>Author Feedback</h2>
-            <ShowReviews data={dummyauthorfeedback} />
-          </div>
-        )}
-      </div>
 
       <Link to="/">Back</Link>
     </div>
