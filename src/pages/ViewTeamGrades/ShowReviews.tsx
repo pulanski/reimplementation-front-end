@@ -1,4 +1,5 @@
 import React from 'react';
+import { getColorClass } from './utils';
 
 interface ReviewComment {
   score: number;
@@ -37,7 +38,7 @@ const ShowReviews: React.FC<ShowReviewsProps> = ({ data }) => {
             <div key={`round-${r}-question-${j}-review-${i}`} className="review-block">
               <div className="question">{j+1}. {data[r][j].questionText}</div>
               <div className="score-container">
-                <span className="score">{data[r][j].reviews[i].score}</span>
+                <span className={`score ${getColorClass(data[r][j].reviews[i].score,data[r][j].maxScore)}`}>{data[r][j].reviews[i].score}</span>
                 {data[r][j].reviews[i].comment && (
                   <div className="comment">{data[r][j].reviews[i].comment}</div>
                 )}
