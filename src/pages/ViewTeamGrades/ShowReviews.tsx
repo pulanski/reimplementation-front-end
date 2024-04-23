@@ -1,9 +1,13 @@
 import React from 'react';
 import { getColorClass } from './utils';
+import { RootState } from "../../store/store";
+import { useDispatch, useSelector } from "react-redux";
+
 
 interface ReviewComment {
   score: number;
   comment?: string;
+  name: string;
 }
 
 interface Review {
@@ -21,6 +25,11 @@ interface ShowReviewsProps {
 const ShowReviews: React.FC<ShowReviewsProps> = ({ data }) => {
   const rounds = data.length;
 
+  const auth = useSelector(
+    (state: RootState) => state.authentication,
+    (prev, next) => prev.isAuthenticated === next.isAuthenticated
+  );
+
 
   // Render each review for every question in each round
   const renderReviews = () => {
@@ -32,7 +41,15 @@ const ShowReviews: React.FC<ShowReviewsProps> = ({ data }) => {
       const num_of_reviews = data[r][0].reviews.length;
       reviewElements.push(<div className="round-heading">Round {r+1}</div>)
       for (let i = 0; i < num_of_reviews; i++) {
-        reviewElements.push(<div className="review-heading">Review {i+1}</div>);
+        if (auth.user.role !== "Student") {
+          reviewElements.push(
+              <div className="review-heading">Review {i+1}: {data[r][0].reviews[i].name}</div>
+          );
+        } else {
+            reviewElements.push(
+                <div className="review-heading">Review {i+1}</div>
+            );
+        }
         for (let j = 0; j < num_of_questions; j++) {
           reviewElements.push(
             <div key={`round-${r}-question-${j}-review-${i}`} className="review-block">
