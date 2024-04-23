@@ -38,11 +38,31 @@ interface IParticipantEditor {
 
 const ParticipantEditor: React.FC<IParticipantEditor> = ({ mode, type }) => {
   const roleOptions = [
-    { label: "Participant", value: "participant", description: "Participant description" },
-    { label: "Reader", value: "reader", description: "Reader description" },
-    { label: "Reviewer", value: "reviewer", description: "Reviewer description" },
-    { label: "Submitter", value: "submitter", description: "Submitter description" },
-    { label: "Mentor", value: "mentor", description: "Mentor description" },
+    {
+      label: "Participant",
+      value: "participant",
+      description:
+        "Engages fully in project activities, submitting work and participating in peer reviews.",
+    },
+    { label: "Reader", value: "reader", description: "Just takes the quiz on the artifact" },
+    {
+      label: "Reviewer",
+      value: "reviewer",
+      description:
+        "Assesses the work of peers, providing feedback and recommendations for improvement.",
+    },
+    {
+      label: "Submitter",
+      value: "submitter",
+      description:
+        "Responsible for uploading content or documents pertinent to the project or course requirements.",
+    },
+    {
+      label: "Mentor",
+      value: "mentor",
+      description:
+        "Guides participants through advice, expertise, and feedback to enhance their learning and project outcomes.",
+    },
   ];
   const { data: participantResponse, error: participantError, sendRequest } = useAPI();
   const auth = useSelector(
@@ -140,11 +160,13 @@ const ParticipantEditor: React.FC<IParticipantEditor> = ({ mode, type }) => {
                     options={users}
                     disabled={mode === "update" || auth.user.role !== ROLE.ADMIN.valueOf()}
                   />
+
                   <OverlayTrigger
                     placement="top"
                     overlay={<Tooltip id="tooltip-add-participant">Add Participant</Tooltip>}
                   >
-                    <button
+                    <Button
+                      variant="outline-success"
                       type="submit"
                       disabled={
                         !(
@@ -153,15 +175,10 @@ const ParticipantEditor: React.FC<IParticipantEditor> = ({ mode, type }) => {
                           Object.keys(formik.touched).length > 0
                         ) || formik.isSubmitting
                       }
-                      className="btn btn-outline-success ms-2"
-                      style={{ border: "none", background: "transparent" }} // Apply additional styling as needed
+                      className="ms-2"
                     >
-                      <img
-                        src="\assets\icons\add-participant-24.png"
-                        alt="Add"
-                        style={{ width: "20px", height: "20px" }} // Adjust the size as needed
-                      />
-                    </button>
+                      Add
+                    </Button>
                   </OverlayTrigger>
                 </InputGroup>
               </Col>
