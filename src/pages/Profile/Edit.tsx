@@ -7,7 +7,7 @@ import { Button } from 'react-bootstrap'; // Importing Button component from rea
 // Define initial form values and validation schema using Yup
 const Edit: React.FC = () => {
   const initialValues = {
-    fullName: '',
+    fullName: 'Admin',
     password: '',
     confirmPassword: '',
     email: '',
