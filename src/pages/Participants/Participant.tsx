@@ -81,7 +81,6 @@ const Participants: React.FC<IModel> = ({ type }) => {
 
   return (
     <>
-      <Outlet />
       <main>
         <Container fluid className="px-md-4">
           <Row className="mt-md-2 mb-md-2">
@@ -91,13 +90,14 @@ const Participants: React.FC<IModel> = ({ type }) => {
             <hr />
           </Row>
           <Row>
-            <Col md={{ span: 1, offset: 11 }}>
-              <OverlayTrigger overlay={tooltip} placement="bottom">
-                <Button variant="outline-success" onClick={() => navigate("new")}>
-                  <BsPersonFillAdd />
-                </Button>
-              </OverlayTrigger>
-            </Col>
+            <h2> Assignment Participants: AssignmentName</h2>
+            <Row className="align-items-center justify-content-between">
+              <Col>
+                <Outlet />
+              </Col>
+            </Row>
+
+            <hr />
             {showDeleteConfirmation.visible && (
               <DeleteParticipant
                 participantData={showDeleteConfirmation.data!}
@@ -109,6 +109,7 @@ const Participants: React.FC<IModel> = ({ type }) => {
             <Table
               data={tableData}
               columns={tableColumns}
+              showGlobalFilter={false}
               columnVisibility={{
                 id: false,
                 institution: auth.user.role === ROLE.SUPER_ADMIN.valueOf(),
