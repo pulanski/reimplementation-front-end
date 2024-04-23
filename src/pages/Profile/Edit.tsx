@@ -89,6 +89,15 @@ const Edit: React.FC = () => {
               <Field as="select" name="institution">
                 <option value="North Carolina State University">North Carolina State University</option>
               </Field>
+              <Field as="select" name="institution">
+                <option value="Duke University">Duke University</option>
+              </Field>
+              <Field as="select" name="institution">
+                <option value="Purdue University">Purdue University</option>
+              </Field>
+              <Field as="select" name="institution">
+                <option value="UT Austin">UT Austin</option>
+              </Field>
             </div>
 
             {/* Action Preference radio buttons */}
