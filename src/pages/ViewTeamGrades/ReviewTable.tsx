@@ -7,6 +7,7 @@ import dummyData from './Data/dummyData.json'; // Importing dummy data
 import { calculateAverages, getColorClass } from './utils'; // Importing utility functions
 import './grades.scss'; // Importing styles
 import { Link } from 'react-router-dom'; // Importing Link from react-router-dom
+import Statistics from './Statistics';
 import ShowSubmission from './ShowSubmission'; //importing show submission component
 import { Button, Collapse } from 'react-bootstrap';
 import ShowReviews from './ShowReviews'; //importing show reviews component
@@ -21,6 +22,13 @@ const ReviewTable: React.FC = () => {
   const [open, setOpen] = useState(false); 
   const [showReviews, setShowReviews] = useState(false);
   const [ShowAuthorFeedback, setShowAuthorFeedback] = useState(false);
+
+
+  //function for show submission
+  // const [statisticsVisible, setstatisticsVisible] = useState<boolean>(false);
+  // const toggleStatisticsVisibility = () => {
+  //     setstatisticsVisible(!statisticsVisible);
+  // };
 
   // Function to toggle the sort order for rows
   const toggleSortOrderRow = () => {
@@ -115,6 +123,7 @@ const ReviewTable: React.FC = () => {
 
       <h4 className="text-xl font-semibold mb-1">Review (Round: {currentRound + 1} of {dummyDataRounds.length}) </h4>
       <br></br>
+      <Statistics average={averagePeerReviewScore}/>
       <form>
         {/* <input
           type="checkbox"

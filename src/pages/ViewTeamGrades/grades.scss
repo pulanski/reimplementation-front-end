@@ -224,6 +224,13 @@
   }
 }
 
+.container {
+  display: flex;
+  justify-content: space-between; /* Adjust as needed */
+  width: 80%; /* Ensure the container takes up the full width */
+}
+
+
 .round-heading {
   font-weight: bold;
   margin-top: 20px;
