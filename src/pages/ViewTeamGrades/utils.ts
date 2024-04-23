@@ -13,20 +13,6 @@ export const getColorClass = (score: number, maxScore: number) => {
   else return 'cf';
 };
 
-// Function to get count of reviews with more than 10 words
-// export const getWordCount10 = (row: ReviewData) => {
-//   return row.reviews.filter(
-//     (review) => review.comment && review.comment.trim().split(' ').length > 10
-//   ).length;
-// };
-
-// Function to get count of reviews with more than 20 words
-// export const getWordCount20 = (row: ReviewData) => {
-//   return row.reviews.filter(
-//     (review) => review.comment && review.comment.trim().split(' ').length > 20
-//   ).length;
-// };
-
 // Function to calculate averages for rows and columns
 export const calculateAverages = (
   currentRoundData: ReviewData[],

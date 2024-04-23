@@ -29,7 +29,7 @@ const Statistics: React.FC<StatisticsProps> = ({average}) => {
 
   return (
     
-    <table style={{ width: '50%', borderCollapse: 'collapse' }}>
+    <table style={{ width: '90%', borderCollapse: 'collapse' }}>
       <thead>
       <a href="#" onClick={toggleStatisticsVisibility}>
         {statisticsVisible ? 'hide stats' : 'show stats'}

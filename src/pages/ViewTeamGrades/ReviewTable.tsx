@@ -16,19 +16,10 @@ import ShowReviews from './ShowReviews'; //importing show reviews component
 const ReviewTable: React.FC = () => {
   const [currentRound, setCurrentRound] = useState<number>(0); // State for current round
   const [sortOrderRow, setSortOrderRow] = useState<'asc' | 'desc' | 'none'>('none'); // State for row sort order
-  // const [showWordCount10, setShowWordCount10] = useState(false); // State for showing reviews with more than 10 words
-  // const [showWordCount20, setShowWordCount20] = useState(false); // State for showing reviews with more than 20 words
   const [showToggleQuestion, setShowToggleQuestion] = useState(false); // State for showing question column
   const [open, setOpen] = useState(false); 
   const [showReviews, setShowReviews] = useState(false);
   const [ShowAuthorFeedback, setShowAuthorFeedback] = useState(false);
-
-
-  //function for show submission
-  // const [statisticsVisible, setstatisticsVisible] = useState<boolean>(false);
-  // const toggleStatisticsVisibility = () => {
-  //     setstatisticsVisible(!statisticsVisible);
-  // };
 
   // Function to toggle the sort order for rows
   const toggleSortOrderRow = () => {
@@ -49,8 +40,6 @@ const ReviewTable: React.FC = () => {
   // Function to handle round change
   const handleRoundChange = (roundIndex: number) => {
     setCurrentRound(roundIndex);
-    // setShowWordCount10(false);
-    // setShowWordCount20(false);
   };
 
     // Function to toggle the visibility of ShowReviews component
@@ -123,24 +112,8 @@ const ReviewTable: React.FC = () => {
 
       <h4 className="text-xl font-semibold mb-1">Review (Round: {currentRound + 1} of {dummyDataRounds.length}) </h4>
       <br></br>
-      <Statistics average={averagePeerReviewScore}/>
+      
       <form>
-        {/* <input
-          type="checkbox"
-          id="wordCount10"
-          name="wordCount10"
-          checked={showWordCount10}
-          onChange={(e) => setShowWordCount10(e.target.checked)}
-        />
-        <label htmlFor="wordCount10"> &nbsp; More than 10 words &nbsp;</label> */}
-        {/* <input
-          type="checkbox"
-          id="wordCount20"
-          name="wordCount20"
-          checked={showWordCount20}
-          onChange={(e) => setShowWordCount20(e.target.checked)}
-        />
-        <label htmlFor="wordCount20"> &nbsp;More than 20 words</label> */}
         <input
           type="checkbox"
           id="toggleQuestion"
@@ -167,8 +140,6 @@ const ReviewTable: React.FC = () => {
               {sortOrderRow === "asc" && <span> ▲</span>}
               {sortOrderRow === "desc" && <span> ▼</span>}
             </th>
-            {/* {showWordCount10 && <th className="py-2 px-4 text-center" style={{ width: '70px' }}>10+ Words</th>}
-            {showWordCount20 && <th className="py-2 px-4 text-center" style={{ width: '70px' }}>20+ Words</th>} */}
           </tr>
           </thead>
           <tbody>
@@ -176,8 +147,6 @@ const ReviewTable: React.FC = () => {
             <ReviewTableRow
               key={index}
               row={row}
-              // showWordCount10={showWordCount10}
-              // showWordCount20={showWordCount20}
               showToggleQuestion={showToggleQuestion}
             />
           ))}
@@ -195,6 +164,9 @@ const ReviewTable: React.FC = () => {
         <br></br>
         <RoundSelector currentRound={currentRound} handleRoundChange={handleRoundChange} />
       </div>
+
+      <Statistics average={averagePeerReviewScore}/>
+
       <p className="mt-4">
         <h3>Grade and comment for submission</h3>
         Grade: {dummyData.grade}<br></br>

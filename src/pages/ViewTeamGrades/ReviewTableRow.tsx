@@ -5,8 +5,6 @@ import { ReviewData } from './App'; // Importing the ReviewData interface from A
 // Props interface for ReviewTableRow component
 interface ReviewTableRowProps {
   row: ReviewData; // Data for the row
-  // showWordCount10: boolean; // Flag to show reviews with 10+ words
-  // showWordCount20: boolean; // Flag to show reviews with 20+ words
   showToggleQuestion: boolean; // Flag to toggle the question column
 }
 
@@ -45,10 +43,6 @@ const ReviewTableRow: React.FC<ReviewTableRowProps> = ({ row, showToggleQuestion
 
       {/* Row Average */}
       <td className="py-2 px-4 text-center">{row.RowAvg.toFixed(2)}</td>
-
-      {/* Optional columns for word count
-      {showWordCount10 && <td className="py-2 px-4 text-center">{getWordCount10(row)}</td>}
-      {showWordCount20 && <td className="py-2 px-4 text-center">{getWordCount20(row)}</td>} */}
     </tr>
   );
 };
