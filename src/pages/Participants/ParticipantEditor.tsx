@@ -1,15 +1,24 @@
-import FormSelect from "components/Form/FormSelect";
-import { Form, Formik, FormikHelpers } from "formik";
-import useAPI from "hooks/useAPI";
 import React, { useEffect } from "react";
-import { Button, InputGroup, Modal } from "react-bootstrap";
+import { Formik, Form, Field, FormikHelpers } from "formik";
+import {
+  Button,
+  InputGroup,
+  Row,
+  Col,
+  Form as BootstrapForm,
+  OverlayTrigger,
+  Tooltip,
+} from "react-bootstrap";
+import FormSelect from "components/Form/FormSelect";
+import useAPI from "hooks/useAPI";
 import { useDispatch, useSelector } from "react-redux";
 import { useLoaderData, useLocation, useNavigate, useParams } from "react-router-dom";
 import { alertActions } from "store/slices/alertSlice";
 import { HttpMethod } from "utils/httpMethods";
-import { RootState } from "../../store/store";
-import { ROLE } from "../../utils/interfaces";
+import { RootState } from "store/store";
+import { ROLE } from "utils/interfaces";
 import { IParticipantFormValues, transformParticipantRequest } from "./participantUtil";
+
 /**
  * @author Mrityunjay Joshi on October, 2023
  */
@@ -22,16 +31,19 @@ const initialValues: IParticipantFormValues = {
   name: "",
 };
 
-
-
 interface IParticipantEditor {
   mode: "create" | "update";
   type: string;
 }
 
-
-
 const ParticipantEditor: React.FC<IParticipantEditor> = ({ mode, type }) => {
+  const roleOptions = [
+    { label: "Participant", value: "participant", description: "Participant description" },
+    { label: "Reader", value: "reader", description: "Reader description" },
+    { label: "Reviewer", value: "reviewer", description: "Reviewer description" },
+    { label: "Submitter", value: "submitter", description: "Submitter description" },
+    { label: "Mentor", value: "mentor", description: "Mentor description" },
+  ];
   const { data: participantResponse, error: participantError, sendRequest } = useAPI();
   const auth = useSelector(
     (state: RootState) => state.authentication,
@@ -42,29 +54,44 @@ const ParticipantEditor: React.FC<IParticipantEditor> = ({ mode, type }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const {typeId} = useParams();
+  const { typeId } = useParams();
   // logged-in participant is the parent of the participant being created and the institution is the same as the parent's
-
 
   // Close the modal if the participant is updated successfully and navigate to the participants page
   useEffect(() => {
-    if (participantResponse && participantResponse.status >= 200 && participantResponse.status < 300) {
+    if (
+      participantResponse &&
+      participantResponse.status >= 200 &&
+      participantResponse.status < 300
+    ) {
       dispatch(
         alertActions.showAlert({
           variant: "success",
           message: `Participant ${participantData.name} ${mode}d successfully!`,
         })
       );
-      navigate(location.state?.from ? location.state.from : `/${type}/${typeId}/participants`);
+      navigate(location.state?.from ? location.state.from : `/${type}/${typeId}/participants/new`);
     }
-  }, [dispatch, mode, navigate, participantData.name, participantResponse, location.state?.from, type]);
+  }, [
+    dispatch,
+    mode,
+    navigate,
+    participantData.name,
+    participantResponse,
+    location.state?.from,
+    type,
+  ]);
 
   // Show the error message if the participant is not updated successfully
   useEffect(() => {
-    participantError && dispatch(alertActions.showAlert({ variant: "danger", message: participantError }));
+    participantError &&
+      dispatch(alertActions.showAlert({ variant: "danger", message: participantError }));
   }, [participantError, dispatch]);
 
-  const onSubmit = (values: IParticipantFormValues, submitProps: FormikHelpers<IParticipantFormValues>) => {
+  const onSubmit = (
+    values: IParticipantFormValues,
+    submitProps: FormikHelpers<IParticipantFormValues>
+  ) => {
     let method: HttpMethod = HttpMethod.POST;
     let url: string = "/participants";
 
@@ -74,12 +101,9 @@ const ParticipantEditor: React.FC<IParticipantEditor> = ({ mode, type }) => {
     }
 
     values.type = type;
-    if(type === "assignments" || type === "student_tasks")
-    {
+    if (type === "assignments" || type === "student_tasks") {
       values.assignment_id = typeId as unknown as number;
-    }
-    else if(type === "courses")
-    {
+    } else if (type === "courses") {
       values.course_id = typeId as unknown as number;
     }
 
@@ -94,52 +118,94 @@ const ParticipantEditor: React.FC<IParticipantEditor> = ({ mode, type }) => {
     submitProps.setSubmitting(false);
   };
 
-  const handleClose = () => navigate(location.state?.from ? location.state.from : `/${type}/${typeId}/participants`);  
-
   return (
-    <Modal size="lg" centered show={true} onHide={handleClose} backdrop="static">
-      <Modal.Header closeButton>
-        <Modal.Title>{mode === "update" ? "Update Participant" : "Create Participant"}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        {participantError && <p className="text-danger">{participantError}</p>}
-        <Formik
-          initialValues={mode === "update" ? participantData : initialValues}
-          onSubmit={onSubmit}
-          validateOnChange={false}
-          enableReinitialize={true}
-        >
-          {(formik) => {
-            return (
-              <Form>
+    <>
+      {participantError && <p className="text-danger">{participantError}</p>}
 
-                <FormSelect
-                  controlId="participant-user"
-                  name="user_id"
-                  options={users}
-                  disabled={mode === "update" || auth.user.role !== ROLE.ADMIN.valueOf()}
-                  inputGroupPrepend={<InputGroup.Text id="user-prepend">Users</InputGroup.Text>}
-                />
-                
-                <Modal.Footer>
-                  <Button variant="outline-secondary" onClick={handleClose}>
-                    Close
-                  </Button>
-
-                  <Button
-                    variant="outline-success"
-                    type="submit"
-                    disabled={!(formik.isValid && formik.dirty) || formik.isSubmitting}
+      <Formik
+        initialValues={mode === "update" ? participantData : initialValues}
+        onSubmit={onSubmit}
+        validateOnChange={false}
+        enableReinitialize={true}
+      >
+        {(formik) => (
+          <Form>
+            <Row className="align-items-center">
+              <Col xs={12} md={3}>
+                <InputGroup className="d-flex align-items-center">
+                  <InputGroup.Text id="user-prepend">Users</InputGroup.Text>
+                  <FormSelect
+                    controlId="participant-user"
+                    name="user_id"
+                    options={users}
+                    disabled={mode === "update" || auth.user.role !== ROLE.ADMIN.valueOf()}
+                  />
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={<Tooltip id="tooltip-add-participant">Add Participant</Tooltip>}
                   >
-                    {mode === "update" ? "Update Participant" : "Create Participant"}
-                  </Button>
-                </Modal.Footer>
-              </Form>
-            );
-          }}
-        </Formik>
-      </Modal.Body>
-    </Modal>
+                    <button
+                      type="submit"
+                      disabled={
+                        !(
+                          formik.isValid &&
+                          formik.dirty &&
+                          Object.keys(formik.touched).length > 0
+                        ) || formik.isSubmitting
+                      }
+                      className="btn btn-outline-success ms-2"
+                      style={{ border: "none", background: "transparent" }} // Apply additional styling as needed
+                    >
+                      <img
+                        src="\assets\icons\add-participant-24.png"
+                        alt="Add"
+                        style={{ width: "20px", height: "20px" }} // Adjust the size as needed
+                      />
+                    </button>
+                  </OverlayTrigger>
+                </InputGroup>
+              </Col>
+
+              <Col xs={12} md={6}>
+                {roleOptions.map((role) => (
+                  <div key={role.value} className="mb-3 ms-3 d-inline-flex align-items-center">
+                    <Field
+                      type="radio"
+                      id={role.value}
+                      name="role"
+                      value={role.value}
+                      style={{ marginRight: "5px" }}
+                    />
+                    <BootstrapForm.Label
+                      htmlFor={role.value}
+                      className="ms-1"
+                      style={{ marginRight: "5px" }}
+                    >
+                      {role.label}
+                    </BootstrapForm.Label>
+                    <OverlayTrigger
+                      placement="top"
+                      overlay={<Tooltip id={`tooltip-${role.value}`}>{role.description}</Tooltip>}
+                    >
+                      <img
+                        src="/assets/icons/info.png" // Correct path
+                        alt="Info"
+                        style={{
+                          width: "16px",
+                          height: "16px",
+                          verticalAlign: "middle", // Aligns the icon vertically with adjacent text
+                          cursor: "pointer",
+                        }}
+                      />
+                    </OverlayTrigger>
+                  </div>
+                ))}
+              </Col>
+            </Row>
+          </Form>
+        )}
+      </Formik>
+    </>
   );
 };
 
