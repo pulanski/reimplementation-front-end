@@ -14,7 +14,7 @@ const CircularProgress: React.FC<CircularProgressProps> = ({ size, progress, str
 
   const circleStyle: React.CSSProperties = {
     fill: 'none',
-    stroke: 'orange',
+    stroke: 'rgba(255, 193, 7)',
     strokeLinecap: 'round',
     strokeDasharray: `${circumference} ${circumference}`,
     strokeDashoffset: offset,
