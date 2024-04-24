@@ -6,10 +6,9 @@ import dummyData from './Data/dummyData.json'; // Importing dummy data
 import { calculateAverages, getColorClass } from './utils'; // Importing utility functions
 import './grades.scss'; // Importing styles
 import { Link } from 'react-router-dom'; // Importing Link from react-router-dom
-import Statistics from './Statistics';
-import ShowSubmission from './ShowSubmission'; //importing show submission component
-import { Button, Collapse } from 'react-bootstrap';
-import teammateData from './Data/teammateData.json'; 
+import Statistics from './Statistics'; //import statistics component
+import { Button, Collapse } from 'react-bootstrap'; //imporitng collaspe button
+
 
 // Functional component ReviewTable
 const ReviewTable: React.FC = () => {
@@ -34,16 +33,14 @@ const ReviewTable: React.FC = () => {
     sortOrderRow
   );
 
-  
   // Function to handle round change
   const handleRoundChange = (roundIndex: number) => {
     setCurrentRound(roundIndex);
   };
-
+  //Function to handle Show Question
   const toggleShowQuestion = () => {
     setShowToggleQuestion(!showToggleQuestion);
   };
-
 
   // JSX rendering of the ReviewTable component
   return (
@@ -63,7 +60,6 @@ const ReviewTable: React.FC = () => {
       <Collapse in={open}>
         <div id="example-collapse-text">
           <br></br>
-
           {/* Render links only when open is true */}
           {open && (
             <>
@@ -100,7 +96,7 @@ const ReviewTable: React.FC = () => {
 
       <h4 className="text-xl font-semibold mb-1">Review (Round: {currentRound + 1} of {dummyDataRounds.length}) </h4>
       <br></br>
-      
+      {/* toggle Question Functionality */}
       <form>
         <input
           type="checkbox"
@@ -109,7 +105,7 @@ const ReviewTable: React.FC = () => {
           checked={showToggleQuestion}
           onChange={toggleShowQuestion}
         />
-        <label htmlFor="toggleQuestion"> &nbsp;Toggle Question</label>
+        <label htmlFor="toggleQuestion"> &nbsp;Toggle Question List</label>
       </form>
       <div className="table-container">
         <table className="tbl_heat">
@@ -152,7 +148,7 @@ const ReviewTable: React.FC = () => {
         <br></br>
         <RoundSelector currentRound={currentRound} handleRoundChange={handleRoundChange} />
       </div>
-
+      {/* view stats functionality */}
       <Statistics average={averagePeerReviewScore}/>
 
       <p className="mt-4">

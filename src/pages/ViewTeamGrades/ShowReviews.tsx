@@ -3,7 +3,7 @@ import { getColorClass } from './utils';
 import { RootState } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
 
-
+//props for the ShowReviews
 interface ReviewComment {
   score: number;
   comment?: string;
@@ -22,6 +22,7 @@ interface ShowReviewsProps {
   data: Review[][];
 }
 
+//function for ShowReviews
 const ShowReviews: React.FC<ShowReviewsProps> = ({ data }) => {
   const rounds = data.length;
 
