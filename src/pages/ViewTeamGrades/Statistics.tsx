@@ -87,7 +87,10 @@ const Statistics: React.FC<StatisticsProps> = ({average}) => {
      <th style={headerCellStyle}>Stats</th>
      <th style={headerCellStyle} colSpan={2}><BarGraph sortedData={sortedData} /></th>
      <th style={headerCellStyle} colSpan={2}></th>
-     <th style={headerCellStyle} colSpan={2}>Not Shown</th>
+     {teammateData.length !== 0 && (
+           <th style={headerCellStyle} colSpan={2}></th>
+          )}
+     
      <th style={headerCellStyle}><CircularProgress size={70} progress={75} strokeWidth={10} /></th>
    </tr>
       )}
@@ -100,7 +103,7 @@ const Statistics: React.FC<StatisticsProps> = ({average}) => {
           {teammateData.length !== 0 && (
             <th style={headerCellStyle} colSpan={2}>Teammate Review</th>
           )}
-          <th style={headerCellStyle}></th>
+          
         </tr>
         <tr>
           <th style={subHeaderCellStyle}>Contributor</th>
@@ -175,14 +178,13 @@ const Statistics: React.FC<StatisticsProps> = ({average}) => {
               </div>
             </td>
             <td style={subHeaderCellStyle}>
-              <div style={{textAlign: 'center' }}>
-                {teammateData.length !== 0 && (
-                      <div>
-                      <div>100%</div>
+            {teammateData.length !== 0 && (
+                      <div style={{textAlign: 'center' }}>
+                      <div>75%</div>
                       <div>(in Finished)</div>
-                      </div>
+                </div>
                     )}
-              </div>
+            
             </td>
           </tr>
       </thead>
