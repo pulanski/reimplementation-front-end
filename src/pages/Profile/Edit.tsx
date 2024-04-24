@@ -11,7 +11,7 @@ const Edit: React.FC = () => {
     password: '',
     confirmPassword: '',
     email: '',
-    institution: 'North Carolina State University',
+    institution: 'Other',
     actionPreference: 'cannotShowActions',
     handle: '',
     timeZone: 'GMT-05:00',
@@ -87,7 +87,11 @@ const Edit: React.FC = () => {
             <div className="form-field">
               <label htmlFor="institution" style={{ fontWeight: 800 }}>Institution:</label>
               <Field as="select" name="institution">
+                <option value="Other">Other</option>
                 <option value="North Carolina State University">North Carolina State University</option>
+                <option value="Duke University">Duke University</option>
+                <option value="Purdue University">Purdue University</option>
+                <option value="UT Austin">UT Austin</option>
               </Field>
             </div>
 
@@ -150,6 +154,8 @@ const Edit: React.FC = () => {
               <label htmlFor="timeZone">Preferred Time Zone:</label>
               <Field as="select" name="timeZone">
                 <option value="GMT-05:00">GMT-05:00 Eastern Time (US)</option>
+                <option value="GMT+01:00">GMT+01:00 Berlin</option>
+                <option value="GMT-07:00">Arizona</option>
               </Field>
             </div>
 
@@ -158,7 +164,10 @@ const Edit: React.FC = () => {
               <label htmlFor="language">Preferred Language:</label>
               <Field as="select" name="language">
                 <option value="No Preference">No Preference</option>
+                <option value="English">English</option>
+                <option value="Hindi">Hindi</option>
               </Field>
+              
             </div>
 
             {/* Submit button */}
