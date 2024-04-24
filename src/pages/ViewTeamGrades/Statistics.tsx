@@ -1,20 +1,29 @@
 // Statistics.tsx
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
+import { calculateAverages } from './utils';
 import './grades.scss';
 import CircularProgress  from './CircularProgress';
 import ShowReviews from './ShowReviews'; //importing show reviews component
 import dummyDataRounds from './Data/heatMapData.json'; // Importing dummy data for rounds
 import dummyauthorfeedback from './Data/authorFeedback.json'; // Importing dummy data for author feedback
+import BarGraph from './BarGraph';
 import teammateData from './Data/teammateData.json'; 
 import AverageMarks from './teamMarks'; 
 
-//props for statictis component
+//props for statistics component
 interface StatisticsProps {
   average:string;
 }
 
 //statistics component
 const Statistics: React.FC<StatisticsProps> = ({average}) => {
+  const [sortedData, setSortedData] = useState<any[]>([]);
+  useEffect(() => {
+    const { averagePeerReviewScore, columnAverages, sortedData } = calculateAverages(dummyDataRounds[0], "asc");
+    const rowAvgArray = sortedData.map(item => item.RowAvg);
+    console.log(rowAvgArray);
+    setSortedData(sortedData.map(item => item.RowAvg));
+  }, []); 
 
   const [statisticsVisible, setstatisticsVisible] = useState<boolean>(false);
   const toggleStatisticsVisibility = () => {
@@ -65,7 +74,9 @@ const Statistics: React.FC<StatisticsProps> = ({average}) => {
   };
 
   return (
+    
     <div>
+      
     <table style={{ width: '90%', borderCollapse: 'collapse' }}>
       <thead>
       <a href="#" onClick={(e) => { e.preventDefault(); toggleStatisticsVisibility();}}>
@@ -74,7 +85,7 @@ const Statistics: React.FC<StatisticsProps> = ({average}) => {
       {statisticsVisible && (
      <tr>
      <th style={headerCellStyle}>Stats</th>
-     <th style={headerCellStyle} colSpan={2}>Image</th>
+     <th style={headerCellStyle} colSpan={2}><BarGraph sortedData={sortedData} /></th>
      <th style={headerCellStyle} colSpan={2}></th>
      <th style={headerCellStyle} colSpan={2}>Not Shown</th>
      <th style={headerCellStyle}><CircularProgress size={70} progress={75} strokeWidth={10} /></th>
