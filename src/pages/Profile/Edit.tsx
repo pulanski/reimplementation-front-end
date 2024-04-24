@@ -159,6 +159,8 @@ const Edit: React.FC = () => {
               <label htmlFor="timeZone">Preferred Time Zone:</label>
               <Field as="select" name="timeZone">
                 <option value="GMT-05:00">GMT-05:00 Eastern Time (US)</option>
+                <option value="GMT+01:00">GMT+01:00 Berlin</option>
+                <option value="GMT-07:00">Arizona</option>
               </Field>
             </div>
 
