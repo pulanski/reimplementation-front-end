@@ -8,13 +8,12 @@ import dummyauthorfeedback from './Data/authorFeedback.json'; // Importing dummy
 import teammateData from './Data/teammateData.json'; 
 import AverageMarks from './teamMarks'; 
 
-
+//props for statictis component
 interface StatisticsProps {
-  // Define any props here if needed
   average:string;
 }
 
-
+//statistics component
 const Statistics: React.FC<StatisticsProps> = ({average}) => {
 
   const [statisticsVisible, setstatisticsVisible] = useState<boolean>(false);
@@ -40,6 +39,7 @@ const Statistics: React.FC<StatisticsProps> = ({average}) => {
     
   };
 
+  //calculation for total reviews recieved
   let totalReviewsForQuestion1: number = 0;
   dummyDataRounds.forEach(round => {
     round.forEach(question => {
@@ -48,7 +48,7 @@ const Statistics: React.FC<StatisticsProps> = ({average}) => {
       }
     });
   });
-
+  //calculation for total feedback recieved
   let totalfeedbackForQuestion1: number = 0;
   dummyauthorfeedback.forEach(round => {
     round.forEach(question => {
@@ -114,7 +114,6 @@ const Statistics: React.FC<StatisticsProps> = ({average}) => {
               <div style={{textAlign: 'center' }}>
                 <a href="#">ssshah26 </a><span>(Siddharth Shah)</span>
                 <br />
-                {/* <a href="#">show submission </a><span>(E2425)</span> */}
               </div>
             </td>
             <td style={subHeaderCellStyle}>

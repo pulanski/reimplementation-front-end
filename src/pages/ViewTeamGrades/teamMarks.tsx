@@ -1,5 +1,5 @@
 import React from 'react';
-
+//props for averagemarks component
 interface Review {
     name: string;
     score: number;
@@ -15,7 +15,7 @@ interface Question {
 interface Props {
     data: Question[];
 }
-
+//calculation for average marks for teammate review
 const AverageMarks: React.FC<Props> = ({ data }) => {
     const calculateTotalAverageMarks = (): string => {
         let totalScore = 0;
@@ -40,4 +40,4 @@ const AverageMarks: React.FC<Props> = ({ data }) => {
     );
 };
 
-export default AverageMarks;
+export default AverageMarks; //returns the average teammate marks recieved
