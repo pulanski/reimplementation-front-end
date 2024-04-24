@@ -5,6 +5,8 @@ import CircularProgress  from './CircularProgress';
 import ShowReviews from './ShowReviews'; //importing show reviews component
 import dummyDataRounds from './Data/heatMapData.json'; // Importing dummy data for rounds
 import dummyauthorfeedback from './Data/authorFeedback.json'; // Importing dummy data for author feedback
+import teammateData from './Data/teammateData.json'; 
+import AverageMarks from './teamMarks'; 
 
 
 interface StatisticsProps {
@@ -66,7 +68,7 @@ const Statistics: React.FC<StatisticsProps> = ({average}) => {
     <div>
     <table style={{ width: '90%', borderCollapse: 'collapse' }}>
       <thead>
-      <a href="#" onClick={toggleStatisticsVisibility}>
+      <a href="#" onClick={(e) => { e.preventDefault(); toggleStatisticsVisibility();}}>
         {statisticsVisible ? 'hide stats' : 'show stats'}
       </a>
       {statisticsVisible && (
@@ -81,18 +83,30 @@ const Statistics: React.FC<StatisticsProps> = ({average}) => {
         <tr>
           <th style={headerCellStyle}></th>
           <th style={headerCellStyle} colSpan={2}>Submitted Work</th>
-          <th style={headerCellStyle} colSpan={2}>Author Feedback</th>
-          <th style={headerCellStyle} colSpan={2}>Teammate Review</th>
+          {dummyauthorfeedback[0].length !== 0 && (
+            <th style={headerCellStyle} colSpan={2}>Author Feedback</th>
+          )}
+          {teammateData.length !== 0 && (
+            <th style={headerCellStyle} colSpan={2}>Teammate Review</th>
+          )}
           <th style={headerCellStyle}></th>
         </tr>
         <tr>
           <th style={subHeaderCellStyle}>Contributor</th>
           <th style={subHeaderCellStyle}>Average</th>
           <th style={subHeaderCellStyle}>Range</th>
-          <th style={subHeaderCellStyle}>Average</th>
-          <th style={subHeaderCellStyle}>Range</th>
-          <th style={subHeaderCellStyle}>Average</th>
-          <th style={subHeaderCellStyle}>Range</th>
+          {dummyauthorfeedback[0].length !== 0 && (
+            <th style={subHeaderCellStyle}>Average</th>
+          )}
+          {dummyauthorfeedback[0].length !== 0 && (
+            <th style={subHeaderCellStyle}>Range</th>
+          )}
+          {teammateData.length !== 0 && (
+            <th style={subHeaderCellStyle}>Average</th>
+          )}
+          {teammateData.length !== 0 && (
+            <th style={subHeaderCellStyle}>Range</th>
+          )}
           <th style={subHeaderCellStyle}>Final Score</th>
         </tr>
         <tr>
@@ -113,38 +127,51 @@ const Statistics: React.FC<StatisticsProps> = ({average}) => {
             </td>
             <td style={subHeaderCellStyle}>
               <div style={{textAlign: 'center' }}>
-                <div>9999% - N/A%</div>
+                <div>99.99% - 100%</div>
               </div>
             </td>
             <td style={subHeaderCellStyle}>
-              <div style={{textAlign: 'center' }}>
-                <div>96.67%</div>
+              
+              {dummyauthorfeedback[0].length !== 0 && (
+                <div style={{textAlign: 'center' }}>
+                <div>96.67</div>
                 <a href="#" onClick={(e) => { e.preventDefault(); toggleAuthorFeedback(); }}>
                     {ShowAuthorFeedback ? 'Hide Author Feedback' : 'Show Author Feedback'}
                 </a><span>({totalfeedbackForQuestion1})</span>
               </div>
+              )}
               <div>
       </div>
             </td>
             <td style={subHeaderCellStyle}>
               <div style={{textAlign: 'center' }}>
+              {dummyauthorfeedback[0].length !== 0 && (
                 <div>87% - 100%</div>
+              )}   
               </div>
             </td>
             <td style={subHeaderCellStyle}>
               <div style={{textAlign: 'center' }}>
-                <div>---</div>
+                    {teammateData.length !== 0 && (
+                      <div><AverageMarks data={teammateData} /></div>
+                    )}
               </div>
             </td>
             <td style={subHeaderCellStyle}>
               <div style={{textAlign: 'center' }}>
-              <div>---</div>
+              {teammateData.length !== 0 && (
+                      <div>90% - 100%</div>
+                    )}
               </div>
             </td>
             <td style={subHeaderCellStyle}>
               <div style={{textAlign: 'center' }}>
-                <div>0.00%</div>
-                <div>(in Finished)</div>
+                {teammateData.length !== 0 && (
+                      <div>
+                      <div>100%</div>
+                      <div>(in Finished)</div>
+                      </div>
+                    )}
               </div>
             </td>
           </tr>

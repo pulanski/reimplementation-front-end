@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom'; // Importing Link from react-router-dom
 import Statistics from './Statistics';
 import ShowSubmission from './ShowSubmission'; //importing show submission component
 import { Button, Collapse } from 'react-bootstrap';
+import teammateData from './Data/teammateData.json'; 
 
 // Functional component ReviewTable
 const ReviewTable: React.FC = () => {
@@ -33,6 +34,7 @@ const ReviewTable: React.FC = () => {
     sortOrderRow
   );
 
+  
   // Function to handle round change
   const handleRoundChange = (roundIndex: number) => {
     setCurrentRound(roundIndex);
