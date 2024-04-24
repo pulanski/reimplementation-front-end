@@ -155,7 +155,7 @@ const Edit: React.FC = () => {
               <Field as="select" name="timeZone">
                 <option value="GMT-05:00">GMT-05:00 Eastern Time (US)</option>
                 <option value="GMT+01:00">GMT+01:00 Berlin</option>
-                <option value="GMT-07:00">Arizona</option>
+                <option value="GMT-07:00">GMT-07:00 Arizona (US)</option>
               </Field>
             </div>
 
