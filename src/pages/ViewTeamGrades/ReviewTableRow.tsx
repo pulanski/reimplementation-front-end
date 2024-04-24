@@ -10,7 +10,6 @@ interface ReviewTableRowProps {
 
 // Functional component ReviewTableRow
 const ReviewTableRow: React.FC<ReviewTableRowProps> = ({ row, showToggleQuestion }) => {
-  const [toggleQuestion, setToggleQuestion] = useState<boolean>(showToggleQuestion);
 
   return (
     <tr className={row.maxScore === 1 ? "no-bg" : ""}>
