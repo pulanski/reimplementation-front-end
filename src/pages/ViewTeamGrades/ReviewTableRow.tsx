@@ -24,7 +24,7 @@ const ReviewTableRow: React.FC<ReviewTableRowProps> = ({ row, showToggleQuestion
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{row.questionNumber}
         </div>
       </td>
-
+          {/* Toggle Question */}
       {showToggleQuestion && (
         <td className="text-center" >{row.questionText}</td>
       )}
