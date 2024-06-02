@@ -2,7 +2,6 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import { assignmentColumns as ASSIGNMENT_COLUMNS } from "./AssignmentColumns";
 import { BsFileText } from "react-icons/bs";
 import DeleteAssignment from "./AssignmentDelete";
@@ -105,7 +104,12 @@ const Assignments = () => {
 
           <Row>
             <Col md={{ span: 1, offset: 11 }}>
-              <Button variant="outline-info" onClick={() => navigate("new")}>
+              <Button
+                variant="outline-info"
+                onClick={() => navigate("new")}
+                className="d-flex align-items-center"
+              >
+                <span className="me-1">Create</span>
                 <BsFileText />
               </Button>
             </Col>

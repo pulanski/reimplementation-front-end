@@ -19,6 +19,7 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 interface IModel {
   type: "student_tasks" | "courses" | "assignments";
+  id: Number;
 }
 
 const Participants: React.FC<IModel> = ({ type }) => {

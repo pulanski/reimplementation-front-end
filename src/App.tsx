@@ -30,7 +30,12 @@ import { loadCourseInstructorDataAndInstitutions } from "pages/Courses/CourseUti
 import TA from "pages/TA/TA";
 import TAEditor from "pages/TA/TAEditor";
 import { loadTAs } from "pages/TA/TAUtil";
-
+import CreateTeams from "pages/Assignments/CreateTeams";
+import AssignReviewer from "pages/Assignments/AssignReviewer";
+import ViewSubmissions from "pages/Assignments/ViewSubmissions";
+import ViewScores from "pages/Assignments/ViewScores";
+import ViewReports from "pages/Assignments/ViewReports";
+import ViewDelayedJobs from "pages/Assignments/ViewDelayedJobs";
 function App() {
   const router = createBrowserRouter([
     {
@@ -42,6 +47,37 @@ function App() {
         { path: "login", element: <Login /> },
         { path: "logout", element: <ProtectedRoute element={<Logout />} /> },
         { path: "edit-questionnaire", element: <ProtectedRoute element={<Questionnaire />} /> },
+        {
+          path: "assignments/edit/:id/createteams",
+          element: <CreateTeams />,
+          loader: loadAssignment,
+        },
+
+        {
+          path: "assignments/edit/:id/assignreviewer",
+          element: <AssignReviewer />,
+          loader: loadAssignment,
+        },
+        {
+          path: "assignments/edit/:id/viewsubmissions",
+          element: <ViewSubmissions />,
+          loader: loadAssignment,
+        },
+        {
+          path: "assignments/edit/:id/viewscores",
+          element: <ViewScores />,
+          loader: loadAssignment,
+        },
+        {
+          path: "assignments/edit/:id/viewreports",
+          element: <ViewReports />,
+          loader: loadAssignment,
+        },
+        {
+          path: "assignments/edit/:id/viewdelayedjobs",
+          element: <ViewDelayedJobs />,
+          loader: loadAssignment,
+        },
         {
           path: "assignments",
           element: <ProtectedRoute element={<Assignment />} leastPrivilegeRole={ROLE.TA} />,
@@ -76,7 +112,7 @@ function App() {
         },
         {
           path: "student_tasks/:typeId/participants",
-          element: <Participants type="student_tasks" />,
+          element: <Participants type="student_tasks" id={1} />,
           children: [
             {
               path: "new",
@@ -86,8 +122,40 @@ function App() {
           ],
         },
         {
-          path: "courses/:typeId/participants",
-          element: <Participants type="courses" />,
+          path: "assignments/edit/:assignmentId/participants",
+          element: <Participants type="student_tasks" id={1} />,
+          children: [
+            {
+              path: "new",
+              element: <ParticipantEditor mode="create" type="assignments" />,
+              loader: loadParticipantDataRolesAndInstitutions,
+            },
+            {
+              path: "edit/:id",
+              element: <ParticipantEditor mode="update" type="assignments" />,
+              loader: loadParticipantDataRolesAndInstitutions,
+            },
+          ],
+        },
+        {
+          path: "student_tasks/edit/:assignmentId/participants",
+          element: <Participants type="student_tasks" id={1} />,
+          children: [
+            {
+              path: "new",
+              element: <ParticipantEditor mode="create" type="student_tasks" />,
+              loader: loadParticipantDataRolesAndInstitutions,
+            },
+            {
+              path: "edit/:id",
+              element: <ParticipantEditor mode="update" type="student_tasks" />,
+              loader: loadParticipantDataRolesAndInstitutions,
+            },
+          ],
+        },
+        {
+          path: "courses/participants",
+          element: <Participants type="courses" id={1} />,
           children: [
             {
               path: "new",
@@ -98,7 +166,7 @@ function App() {
         },
         {
           path: "assignments/:typeId/participants",
-          element: <Participants type="assignments" />,
+          element: <Participants type="assignments" id={1} />,
           children: [
             {
               path: "new",
