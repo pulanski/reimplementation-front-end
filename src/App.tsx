@@ -31,7 +31,8 @@ import TA from "pages/TA/TA";
 import TAEditor from "pages/TA/TAEditor";
 import { loadTAs } from "pages/TA/TAUtil";
 import EditProfile from "pages/Profile/Edit";
-
+import Reviews from "pages/Reviews/reviews";
+import Email_the_author from "./pages/Email_the_author/email_the_author";
 import CreateTeams from "pages/Assignments/CreateTeams";
 import AssignReviewer from "pages/Assignments/AssignReviewer";
 import ViewSubmissions from "pages/Assignments/ViewSubmissions";
@@ -179,6 +180,14 @@ function App() {
               loader: loadParticipantDataRolesAndInstitutions,
             },
           ],
+        },
+        {
+          path: "reviews",
+          element: <Reviews/>,
+        },
+        {
+          path: "email_the_author",
+          element: <Email_the_author/>,
         },
         // Fixed the missing comma and added an opening curly brace
         {
